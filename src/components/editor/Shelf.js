@@ -83,7 +83,8 @@ const LevelResizer = props => {
 }
 
 /*
-  
+  LevelDimension: Generic UI component for adding/removing
+  rows and columns
 */
 const LevelDimension = props => {
   return (

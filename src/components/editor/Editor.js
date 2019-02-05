@@ -4,6 +4,10 @@ import TileGrid from './TileGrid.js';
 import Shelf from './Shelf.js';
 import FileButtons from './FileButtons.js';
 
+/*
+  Editor: The State manager for the level editor
+  (Game board, shelf, and file buttons).
+*/
 class Editor extends Component {
   state = {
     rows: 8,

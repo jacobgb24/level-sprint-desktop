@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import Button from '@material/react-button'
 
+/*
+  FileButtons: The set of buttons to save/load/create levels
+*/
 const FileButtons = props => {
   return (
     <div className="Buttons">

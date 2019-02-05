@@ -9,7 +9,9 @@ class Editor extends Component {
     rows: 8,
     cols: 11,
     min_rows: 8,
-    min_cols: 11
+    min_cols: 11,
+    active_tool: 0,
+    active_object: -1
   };
 
   render() {
@@ -19,6 +21,8 @@ class Editor extends Component {
         <div>
           <TileGrid rows={this.state.rows} cols={this.state.cols} />
           <Shelf
+            active_object={this.state.active_object}
+            active_tool={this.state.active_tool}
             addColumn={this.addColumn}
             removeColumn={this.removeColumn}
             addRow={this.addRow}

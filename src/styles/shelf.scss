@@ -4,6 +4,19 @@
 
 .Shelf {
   background-color: $mdc-theme-surface;
-  width: 100px;
-  height: 100px;
+}
+
+.LevelObjects {
+  background-color: #FF8888;
+  margin: 4px;
+}
+
+.Tools {
+  background-color: #88FF88;
+  margin: 4px;
+}
+
+.LevelResizer {
+  background-color: #8888FF;
+  margin: 4px;
 }

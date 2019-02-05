@@ -7,27 +7,60 @@ import '../../styles/shelf.scss'
   side of the screen
 */
 class Shelf extends Component {
+  state = {
+    objects:[
+      ['Ground', 'img_path'],
+      ['Hill', 'img_path'],
+      ['Hazard', 'img_path'],
+      ['Spawn', 'img_path'],
+      ['Goal', 'img_path'],
+      ['NPC', 'img_path']
+    ],
+    tools: [
+      ['Place', 'img_path'],
+      ['Move', 'img_path'],
+      ['Delete', 'img_path']
+    ],
+  }
+
   render() {
     return (
       <div className="Shelf">
         SHELF
-        <ShelfSet />
-        <ShelfSet />
-        <LevelResizer
-          addColumn={this.props.addColumn}
-          removeColumn={this.props.removeColumn}
-          addRow={this.props.addRow}
-          removeRow={this.props.removeRow}
-          cols={this.props.cols}
-          rows={this.props.rows}
-        />
+        <div className="LevelObjects">
+          <ShelfSet
+            name="Level Objects"
+            items={this.state.objects}
+            active={this.props.active_object}
+          />
+        </div>
+
+        <div className="Tools">
+          <ShelfSet
+            name="Tools"
+            items={this.state.tools}
+            active={this.props.active_tool}
+          />
+        </div>
+
+        <div className="LevelResizer">
+          <LevelResizer
+            addColumn={this.props.addColumn}
+            removeColumn={this.props.removeColumn}
+            addRow={this.props.addRow}
+            removeRow={this.props.removeRow}
+            cols={this.props.cols}
+            rows={this.props.rows}
+          />
+        </div>
       </div>
     );
   }
 }
 
 /*
-  LevelResizer: Option to increase/decrease level size.
+  LevelResizer: The option at the bottom of the shelf
+  which allows the user to increase/decrease level dimensions.
 */
 const LevelResizer = props => {
   return (
@@ -49,7 +82,9 @@ const LevelResizer = props => {
   );
 }
 
-/**/
+/*
+  
+*/
 const LevelDimension = props => {
   return (
     <div>
@@ -82,8 +117,21 @@ class Button extends Component {
 */
 class ShelfSet extends Component {
   render() {
+    let items = []
+    for (let i = 0; i < this.props.items.length; i++) {
+      items.push(
+        <ShelfItem
+          name={this.props.items[i][0]}
+          icon={this.props.items[i][1]}
+          active={(i == this.props.active)}
+        />
+      );
+    }
+
     return (
       <div>
+        <div>{this.props.name}</div>
+        <div>{items}</div>
       </div>
     );
   }
@@ -95,9 +143,22 @@ class ShelfSet extends Component {
   such as a level object or tool.
 */
 const ShelfItem = props => {
-  return (
-    <div></div>
-  );
+  if (props.active) {
+    return (
+      <div className="activeShelfItem">
+        <div>{props.icon}</div>
+        <div>{props.name}</div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="inactiveShelfItem">
+        <div>{props.icon}</div>
+        <div>{props.name}</div>
+      </div>
+    );
+  }
+
 }
 
 export default Shelf;

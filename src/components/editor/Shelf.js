@@ -1,12 +1,11 @@
 import React, {Component} from 'react'
 
-import '../../styles/components.scss'
+import '../../styles/shelf.scss'
 
 /*
   Shelf: The set of objects, tools and options on the right-hand
   side of the screen
 */
-
 class Shelf extends Component {
   render() {
     return (
@@ -14,7 +13,14 @@ class Shelf extends Component {
         SHELF
         <ShelfSet />
         <ShelfSet />
-        <LevelResizer />
+        <LevelResizer
+          addColumn={this.props.addColumn}
+          removeColumn={this.props.removeColumn}
+          addRow={this.props.addRow}
+          removeRow={this.props.removeRow}
+          cols={this.props.cols}
+          rows={this.props.rows}
+        />
       </div>
     );
   }
@@ -25,17 +31,55 @@ class Shelf extends Component {
 */
 const LevelResizer = props => {
   return (
-    <div></div>
+    <div>
+      <LevelDimension
+        remove={props.removeColumn}
+        add={props.addColumn}
+        value={props.cols}
+        name="columns"
+      />
+
+      <LevelDimension
+        remove={props.removeRow}
+        add={props.addRow}
+        value={props.rows}
+        name="rows"
+      />
+    </div>
   );
 }
 
+/**/
+const LevelDimension = props => {
+  return (
+    <div>
+      {props.name}
+      <div>
+        <Button label={"<"} onClickFunction={props.remove} />
+        {props.value}
+        <Button label={">"} onClickFunction={props.add} />
+      </div>
+    </div>
+  );
+}
 
+/*
+
+*/
+class Button extends Component {
+  handleClick = () => {
+    this.props.onClickFunction();
+  };
+
+  render() {
+    return <button onClick={this.handleClick}>{this.props.label}</button>;
+  }
+}
 
 /*
   ShelfSet: A container for a set of shelf items,
   such as level objects or tools.
 */
-
 class ShelfSet extends Component {
   render() {
     return (
@@ -50,7 +94,6 @@ class ShelfSet extends Component {
   Shelf Item: A single item on the shelf,
   such as a level object or tool.
 */
-
 const ShelfItem = props => {
   return (
     <div></div>

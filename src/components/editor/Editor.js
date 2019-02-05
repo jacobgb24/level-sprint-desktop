@@ -4,8 +4,6 @@ import TileGrid from './TileGrid.js';
 import Shelf from './Shelf.js';
 import FileButtons from './FileButtons.js';
 
-import '../../styles/components.scss'
-
 class Editor extends Component {
   state = {
     rows: 8,
@@ -18,26 +16,17 @@ class Editor extends Component {
     return (
       <div>
         <FileButtons/>
-
         <div>
           <TileGrid rows={this.state.rows} cols={this.state.cols} />
-          <Shelf />
+          <Shelf
+            addColumn={this.addColumn}
+            removeColumn={this.removeColumn}
+            addRow={this.addRow}
+            removeRow={this.removeRow}
+            cols={this.state.cols}
+            rows={this.state.rows}
+          />
         </div>
-
-        <div>
-          <div>
-            <Button label={"<"} onClickFunction={this.removeColumn} />
-            <Button label={">"} onClickFunction={this.addColumn} />
-          </div>
-          <div>{this.state.cols}</div>
-
-          <div>
-            <Button label={"<"} onClickFunction={this.removeRow} />
-            <Button label={">"} onClickFunction={this.addRow} />
-          </div>
-          <div>{this.state.rows}</div>
-        </div>
-
       </div>
     );
   }
@@ -72,14 +61,5 @@ class Editor extends Component {
   };
 }
 
-class Button extends React.Component {
-  handleClick = () => {
-    this.props.onClickFunction();
-  };
-
-  render() {
-    return <button onClick={this.handleClick}>{this.props.label}</button>;
-  }
-}
 
 export default Editor;

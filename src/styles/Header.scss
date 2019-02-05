@@ -1,0 +1,54 @@
+@import './_colors.scss';
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400');
+
+.header-bg {
+  background-color: $mdc-theme-primary;
+  width: vw;
+  height: 64px;
+  padding: 16px 16px 16px 24px;
+  display: flex;
+}
+
+.header-logo {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.header-text {
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-title {
+  color: $mdc-theme-on-primary;
+  font-family: 'Share Tech Mono';
+  vertical-align: top;
+  margin: auto 0px 0px;
+  align-self: flex-start;
+  font-size: 28px;
+}
+
+.header-subtext {
+  color: $mdc-theme-on-primary;
+  font-family: 'Roboto';
+  margin: 0px 0px auto;
+  font-size: 18px;
+  font-smooth: antialiased;
+}
+
+.header-menu {
+  margin-left: auto;
+  display: flex;
+  align-items: flex-end;
+}
+.header-hello {
+  color: $mdc-theme-on-primary;
+  font-size: 18px;
+  margin-bottom: 0px;
+  font-family: 'Roboto';
+}
+.header-logout {
+
+}

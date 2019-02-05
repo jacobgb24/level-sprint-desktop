@@ -12,13 +12,19 @@ const Header = props => {
         <h2 className="header-subtext">2D Level Mockups</h2>
       </div>
       <div className="header-menu">
-        <h2 className="header-hello">Welcome, Shigeru</h2>
+      <Button
+        unelevated
+        className="header-hello"
+        onClick={() => console.log(" logout clicked!")}
+        >
+        Welcome, Shigeru
+      </Button>
         <Button
           unelevated
           className="header-logout"
           onClick={() => console.log(" logout clicked!")}
           >
-          LOGOUT
+          Logout
         </Button>
         </div>
     </div>

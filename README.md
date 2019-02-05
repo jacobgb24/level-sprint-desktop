@@ -9,4 +9,8 @@
 ### Building
 - You need to add sass to your path. Do so via `SASS_PATH=./node_modules`.
 - npm start will run project on localhost:3000. Changes automatically show up
-- To deploy to firebase: `firebase deploy`
+- To deploy to firebase: First run `npm run build` then `firebase deploy`
+
+### Notes
+- `Terser` should be version 3.14. The recent 3.16 breaks builds. Check this if
+there is an error when building the project

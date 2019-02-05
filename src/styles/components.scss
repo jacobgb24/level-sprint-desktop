@@ -1,0 +1,9 @@
+@import './_colors.scss';
+@import "@material/react-button/index.scss";
+@import "@material/button/mixins";
+
+.Shelf {
+  background-color: $mdc-theme-surface;
+  width: 100px;
+  height: 100px;
+}

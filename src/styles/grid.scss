@@ -1,0 +1,8 @@
+@import './_colors.scss';
+@import "@material/react-button/index.scss";
+@import "@material/button/mixins";
+
+.Tile {
+  width: 32px;
+  height: 32px;
+}

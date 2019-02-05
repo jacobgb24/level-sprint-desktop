@@ -1,4 +1,4 @@
-@import './_colors.scss';
+@import './styles/_colors.scss';
 @import "@material/react-button/index.scss";
 @import "@material/button/mixins";
 
@@ -14,7 +14,7 @@
   margin-left: auto;
 }
 
-.App {
+.Buttons {
   display: flex;
   width: vw;
   background-color: $mdc-theme-background

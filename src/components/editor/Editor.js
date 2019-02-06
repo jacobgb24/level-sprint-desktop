@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-import TileGrid from './TileGrid.js';
-import Shelf from './Shelf.js';
-import FileButtons from './FileButtons.js';
-import '../../styles/Editor.scss'
+import TileGrid from './parts/TileGrid.js';
+import Shelf from './parts/Shelf.js';
+import FileButtons from './parts/ActionBar.js';
+import './Editor.scss'
 
 
 /*

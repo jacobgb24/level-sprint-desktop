@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../styles/grid.scss'
+import './grid.scss'
 
 /*
   Board: A dynamically sizeable level board.

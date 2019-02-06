@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import '../../styles/shelf.scss'
+import './shelf.scss'
 
 /*
   Shelf: The set of objects, tools and options on the right-hand

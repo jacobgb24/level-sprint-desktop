@@ -1,12 +1,25 @@
 import React, {Component} from 'react'
 import Button from '@material/react-button'
+import TextField, {HelperText, Input} from '@material/react-text-field';
+import './ActionBar.scss'
 
 /*
   FileButtons: The set of buttons to save/load/create levels
 */
-const FileButtons = props => {
+
+
+const ActionBar = props => {
   return (
     <div className="Buttons">
+      <TextField className="level-name"
+        // label="Level Name"
+        outlined
+        dense
+        ><Input
+            placeholder="Unnamed Level..."
+            value=""
+            onChange={(e) => "h"/*this.setState({value: e.target.value})*/}/>
+      </TextField>
       <Button
         raised
         className="button-save-load"
@@ -32,4 +45,4 @@ const FileButtons = props => {
   );
 }
 
-export default FileButtons;
+export default ActionBar;

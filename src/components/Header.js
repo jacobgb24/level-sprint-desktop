@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import logo from '../images/logo.png'
-import '../styles/Header.scss'
+import logo from 'images/logo.png'
+import './Header.scss'
 import Button from '@material/react-button'
 
 const Header = props => {

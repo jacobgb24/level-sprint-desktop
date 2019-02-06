@@ -4,19 +4,33 @@
 
 .Shelf {
   background-color: $mdc-theme-surface;
+  border-color: $mdc-theme-primary;
+  border-width: medium;
+  border-style: solid;
+  margin: 16px;
+}
+
+hr {
+  border-color: $mdc-theme-primary;
+  margin: 0px;
 }
 
 .LevelObjects {
-  background-color: #FF8888;
-  margin: 4px;
+  // background-color: #FF8888;
+  padding: 8px;
 }
 
 .Tools {
-  background-color: #88FF88;
-  margin: 4px;
+  // background-color: #88FF88;
+  padding: 8px;
 }
 
 .LevelResizer {
-  background-color: #8888FF;
-  margin: 4px;
+  // background-color: #8888FF;
+  padding: 8px;
+}
+
+.shelfset-name {
+  font-size: 18px;
+  margin-top: 0px;
 }

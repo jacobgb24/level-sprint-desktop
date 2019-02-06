@@ -26,7 +26,6 @@ class Shelf extends Component {
   render() {
     return (
       <div className="Shelf">
-        SHELF
         <div className="LevelObjects">
           <ShelfSet
             name="Level Objects"
@@ -34,7 +33,7 @@ class Shelf extends Component {
             active={this.props.active_object}
           />
         </div>
-
+        <hr></hr>
         <div className="Tools">
           <ShelfSet
             name="Tools"
@@ -42,9 +41,10 @@ class Shelf extends Component {
             active={this.props.active_tool}
           />
         </div>
-
+        <hr></hr>
         <div className="LevelResizer">
           <LevelResizer
+            name="Level Size (Columns)"
             addColumn={this.props.addColumn}
             removeColumn={this.props.removeColumn}
             addRow={this.props.addRow}
@@ -65,6 +65,7 @@ class Shelf extends Component {
 const LevelResizer = props => {
   return (
     <div>
+      <h2 className="shelfset-name">{props.name}</h2>
       <LevelDimension
         remove={props.removeColumn}
         add={props.addColumn}
@@ -131,7 +132,7 @@ class ShelfSet extends Component {
 
     return (
       <div>
-        <div>{this.props.name}</div>
+        <h2 className="shelfset-name">{this.props.name}</h2>
         <div>{items}</div>
       </div>
     );

@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import TileGrid from './TileGrid.js';
 import Shelf from './Shelf.js';
 import FileButtons from './FileButtons.js';
+import '../../styles/Editor.scss'
+
 
 /*
   Editor: The State manager for the level editor
@@ -20,11 +22,13 @@ class Editor extends Component {
 
   render() {
     return (
-      <div>
-        <FileButtons/>
-        <div>
-          <TileGrid rows={this.state.rows} cols={this.state.cols} />
-          <Shelf
+      <div className="editor-bg">
+        <div className="editor-left">
+          <FileButtons className="editor-buttons"/>
+          <TileGrid className="editor-grid" rows={this.state.rows} cols={this.state.cols} />
+        </div>
+        <Shelf
+            className="editor-shelf"
             active_object={this.state.active_object}
             active_tool={this.state.active_tool}
             addColumn={this.addColumn}
@@ -34,7 +38,6 @@ class Editor extends Component {
             cols={this.state.cols}
             rows={this.state.rows}
           />
-        </div>
       </div>
     );
   }

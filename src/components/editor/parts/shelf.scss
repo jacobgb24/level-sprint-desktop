@@ -1,6 +1,8 @@
 @import 'colors.scss';
 @import "@material/react-button/index.scss";
 @import "@material/button/mixins";
+@import '@material/react-icon-button/index.scss';
+
 
 .Shelf {
   background-color: $mdc-theme-surface;
@@ -31,6 +33,33 @@ hr {
 }
 
 .shelfset-name {
+  font-family: 'Roboto';
   font-size: 18px;
   margin-top: 0px;
+}
+
+.dimension-button {
+  @include mdc-icon-button-size(24px, 24px, 0px)
+}
+
+.dimensions-selector {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.dimension-value {
+  margin: 4px;
+  font-family: 'Roboto';
+}
+
+.dimension-direction {
+  font-family: "Roboto";
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 0px;
 }

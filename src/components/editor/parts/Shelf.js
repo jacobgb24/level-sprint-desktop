@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import IconButton from '@material/react-icon-button';
+import MaterialIcon from '@material/react-material-icon';
 
 import './shelf.scss'
 
@@ -44,7 +46,7 @@ class Shelf extends Component {
         <hr></hr>
         <div className="LevelResizer">
           <LevelResizer
-            name="Level Size (Columns)"
+            name="Level Dimensions"
             addColumn={this.props.addColumn}
             removeColumn={this.props.removeColumn}
             addRow={this.props.addRow}
@@ -90,11 +92,15 @@ const LevelResizer = props => {
 const LevelDimension = props => {
   return (
     <div>
-      {props.name}
-      <div>
-        <Button label={"<"} onClickFunction={props.remove} />
-        {props.value}
-        <Button label={">"} onClickFunction={props.add} />
+      <h4 className="dimension-direction">{props.name}</h4>
+      <div className="dimensions-selector">
+        <IconButton onClick={props.remove} className="dimension-button">
+          <MaterialIcon icon="remove_circle_outline"/>
+        </IconButton>
+        <h2 className="dimension-value">{props.value}</h2>
+        <IconButton onClick={props.add} className="dimension-button">
+          <MaterialIcon icon="add_circle_outline"/>
+        </IconButton>
       </div>
     </div>
   );

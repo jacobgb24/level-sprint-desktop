@@ -4,7 +4,7 @@ import TextField, {HelperText, Input} from '@material/react-text-field';
 import './ActionBar.scss'
 
 /*
-  FileButtons: The set of buttons to save/load/create levels
+  ActionBar: The set of buttons to save/load/create levels and the level name field
 */
 
 
@@ -12,12 +12,11 @@ const ActionBar = props => {
   return (
     <div className="Buttons">
       <TextField className="level-name"
-        // label="Level Name"
         outlined
         dense
         ><Input
             placeholder="Unnamed Level..."
-            value=""
+            value="" //TODO: get value and onChange working
             onChange={(e) => "h"/*this.setState({value: e.target.value})*/}/>
       </TextField>
       <Button

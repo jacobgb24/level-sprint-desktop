@@ -59,7 +59,7 @@ class Shelf extends Component {
           <ShelfSet
             name="Level Objects"
             items={this.state.objects}
-            active={this.props.active_object}
+            active={this.props.activeObject}
           />
         </div>
         <hr></hr>
@@ -67,7 +67,7 @@ class Shelf extends Component {
           <ShelfSet
             name="Tools"
             items={this.state.tools}
-            active={this.props.active_tool}
+            active={this.props.activeTool}
           />
         </div>
         <hr></hr>

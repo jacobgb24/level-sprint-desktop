@@ -11,7 +11,8 @@ class Level {
   }
 
   set(x, y, value) {
-    math.subset(this.data, math.index(y, x), value);
+    this.data.subset(math.index(y, x), value);
+    console.log(this.data)
   }
 
   get(x, y) {

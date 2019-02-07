@@ -31,8 +31,8 @@ class Editor extends Component {
         </div>
         <Shelf
             className="editor-shelf"
-            active_object={this.state.active_object}
-            active_tool={this.state.active_tool}
+            activeObject={this.state.active_object}
+            activeTool={this.state.active_tool}
             addColumn={this.addColumn}
             removeColumn={this.removeColumn}
             addRow={this.addRow}
@@ -48,6 +48,7 @@ class Editor extends Component {
     this.state.cur_level.set(x, y, 1);
     console.log("CLICKED!!")
     this.setState(prev => ({cur_level: prev.cur_level}));
+    console.log(this.state.cur_level)
   }
 
   addColumn = () => {

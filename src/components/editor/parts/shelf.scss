@@ -2,7 +2,7 @@
 @import "@material/react-button/index.scss";
 @import "@material/button/mixins";
 @import '@material/react-icon-button/index.scss';
-
+@import '@material/image-list/mdc-image-list';
 
 .Shelf {
   background-color: $mdc-theme-surface;
@@ -36,6 +36,15 @@ hr {
   font-family: 'Roboto';
   font-size: 18px;
   margin-top: 0px;
+}
+
+.shelfset {
+  @include mdc-image-list-standard-columns(3);
+}
+
+.shelf-item-label {
+  color: $black;
+  margin: auto;
 }
 
 .dimension-button {

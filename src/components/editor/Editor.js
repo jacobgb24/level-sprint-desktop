@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+import Level from './parts/Level.js'
 import TileGrid from './parts/TileGrid.js';
 import Shelf from './parts/Shelf.js';
 import FileButtons from './parts/ActionBar.js';
@@ -12,12 +13,9 @@ import './Editor.scss'
 */
 class Editor extends Component {
   state = {
-    rows: 8,
-    cols: 11,
-    min_rows: 8,
-    min_cols: 11,
     active_tool: 0,
-    active_object: -1
+    active_object: -1,
+    cur_level: new Level()
   };
 
   render() {
@@ -25,7 +23,11 @@ class Editor extends Component {
       <div className="editor-bg">
         <div className="editor-left">
           <FileButtons className="editor-buttons"/>
-          <TileGrid className="editor-grid" rows={this.state.rows} cols={this.state.cols} />
+          <TileGrid
+            className="editor-grid"
+            level={this.state.cur_level}
+            click={this.click}
+          />
         </div>
         <Shelf
             className="editor-shelf"
@@ -35,40 +37,37 @@ class Editor extends Component {
             removeColumn={this.removeColumn}
             addRow={this.addRow}
             removeRow={this.removeRow}
-            cols={this.state.cols}
-            rows={this.state.rows}
+            cols={this.state.cur_level.length}
+            rows={this.state.cur_level.height}
           />
       </div>
     );
   }
 
+  click = (x, y) => {
+    this.state.cur_level.set(x, y, 1);
+    console.log("CLICKED!!")
+    this.setState(prev => ({cur_level: prev.cur_level}));
+  }
+
   addColumn = () => {
-    this.setState(prev => ({ cols: prev.cols + 1 }));
+    this.state.cur_level.addColumn();
+    this.setState(prev => ({cur_level: prev.cur_level}));
   };
 
   removeColumn = () => {
-    let next = this.state.cols - 1;
-    if (next < this.state.min_cols) {
-      next = this.state.min_cols;
-    }
-
-    this.setState(prev => ({ cols: next }));
+    this.state.cur_level.removeColumn();
+    this.setState(prev => ({cur_level: prev.cur_level}));
   };
 
   addRow = () => {
-    this.setState(prev => ({
-      rows: prev.rows + 1
-    }));
+    this.state.cur_level.addRow();
+    this.setState(prev => ({cur_level: prev.cur_level}));
   };
 
   removeRow = () => {
-    let next = this.state.rows - 1;
-    if (next < this.state.min_rows) {
-      next = this.state.min_rows;
-    }
-    this.setState(prev => ({
-      rows: next
-    }));
+    this.state.cur_level.removeRow();
+    this.setState(prev => ({cur_level: prev.cur_level}));
   };
 }
 

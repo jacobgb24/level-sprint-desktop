@@ -1,8 +1,35 @@
 import React, {Component} from 'react'
 import IconButton from '@material/react-icon-button';
 import MaterialIcon from '@material/react-material-icon';
+import "@material/image-list/mdc-image-list.scss";
+
 
 import './shelf.scss'
+
+// Icon Imports
+import ground_line from './icons/toolbar/ground_outlined.svg';
+import ground_fill from './icons/toolbar/ground_filled.svg';
+import slope_line from './icons/toolbar/slope_outlined.svg';
+import slope_fill from './icons/toolbar/slope_filled.svg';
+import hazard_line from './icons/toolbar/hazard_outlined.svg';
+import hazard_fill from './icons/toolbar/hazard_filled.svg';
+
+import place_line from './icons/toolbar/place_outlined.svg';
+import place_fill from './icons/toolbar/place_filled.svg';
+import delete_line from './icons/toolbar/delete_outlined.svg';
+import delete_fill from './icons/toolbar/delete_filled.svg';
+
+// DUMMY Icons
+import spawn_line from './icons/dummy/spawn_outlined.png';
+import spawn_fill from './icons/dummy/spawn_filled.png';
+import goal_line from './icons/dummy/goal_outlined.png';
+import goal_fill from './icons/dummy/goal_filled.png';
+import npc_line from './icons/dummy/npc_outlined.png';
+import npc_fill from './icons/dummy/npc_filled.png';
+
+import move_line from './icons/dummy/move_outlined.png';
+import move_fill from './icons/dummy/move_outlined.png';
+
 
 /*
   Shelf: The set of objects, tools and options on the right-hand
@@ -11,17 +38,17 @@ import './shelf.scss'
 class Shelf extends Component {
   state = {
     objects:[
-      ['Ground', 'img_path'],
-      ['Hill', 'img_path'],
-      ['Hazard', 'img_path'],
-      ['Spawn', 'img_path'],
-      ['Goal', 'img_path'],
-      ['NPC', 'img_path']
+      ['Ground', ground_line, ground_fill],
+      ['Hill', slope_line, slope_fill],
+      ['Hazard', hazard_line, hazard_fill],
+      ['Spawn', spawn_line, spawn_fill],
+      ['Goal', goal_line, goal_fill],
+      ['NPC', npc_line, npc_fill]
     ],
     tools: [
-      ['Place', 'img_path'],
-      ['Move', 'img_path'],
-      ['Delete', 'img_path']
+      ['Place', place_line, place_fill],
+      ['Move', move_line, move_fill],
+      ['Delete', delete_line, delete_fill]
     ],
   }
 
@@ -127,11 +154,13 @@ class ShelfSet extends Component {
   render() {
     let items = []
     for (let i = 0; i < this.props.items.length; i++) {
+      let icon = this.props.items[i][i === this.props.active ? 2 : 1];
       items.push(
         <ShelfItem
           name={this.props.items[i][0]}
-          icon={this.props.items[i][1]}
-          active={(i == this.props.active)}
+          icon={icon}
+          active={(i === this.props.active)}
+          key={i}
         />
       );
     }
@@ -139,7 +168,9 @@ class ShelfSet extends Component {
     return (
       <div>
         <h2 className="shelfset-name">{this.props.name}</h2>
-        <div>{items}</div>
+        <ul className="mdc-image-list shelfset">
+          {items}
+        </ul>
       </div>
     );
   }
@@ -153,17 +184,25 @@ class ShelfSet extends Component {
 const ShelfItem = props => {
   if (props.active) {
     return (
-      <div className="activeShelfItem">
-        <div>{props.icon}</div>
-        <div>{props.name}</div>
-      </div>
+      <li className="mdc-image-list__item activeShelfItem">
+        <div className='mdc-image-list__image-aspect-container'>
+          <img className='mdc-image-list__image' src={props.icon} />
+        </div>
+        <div className='mdc-image-list__supporting'>
+          <span className="mdc-image-list__label shelf-item-label">{props.name}</span>
+        </div>
+      </li>
     );
   } else {
     return (
-      <div className="inactiveShelfItem">
-        <div>{props.icon}</div>
-        <div>{props.name}</div>
-      </div>
+      <li className="mdc-image-list__item inactiveShelfItem">
+        <div className="mdc-image-list__image-aspect-container">
+          <img className="mdc-image-list__image" src={props.icon} alt={props.icon} />
+        </div>
+        <div className="mdc-image-list__supporting">
+          <span className="mdc-image-list__label shelf-item-label">{props.name}</span>
+        </div>
+      </li>
     );
   }
 

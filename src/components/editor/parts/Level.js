@@ -1,4 +1,5 @@
 import * as math from 'mathjs'
+import ground_line from './icons/toolbar/ground_outlined.svg';
 
 class Level {
   constructor() {
@@ -7,16 +8,21 @@ class Level {
     this.length = 11;
     this.min_length = 11;
     this.name = "Unnamed Level...";
-    this.data = math.zeros(this.height, this.length);
+    this.data = math.matrix();
+    this.resize()
   }
 
   set(x, y, value) {
     this.data.subset(math.index(y, x), value);
-    console.log(this.data)
+    // console.log(this.data)
   }
 
   get(x, y) {
-    math.subset(this.data, math.index(y, x));
+    console.log(x,y)
+    console.log(math.subset(this.data, math.index(y, x)))
+
+    return math.subset(this.data, math.index(y, x));
+
   }
 
   addRow() {
@@ -54,7 +60,7 @@ class Level {
   }
 
   resize() {
-    math.resize(this.data, [this.height, this.length]);
+    this.data.resize([this.height, this.length], ground_line);
   }
 
   rename(name) {

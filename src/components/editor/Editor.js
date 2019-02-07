@@ -6,6 +6,7 @@ import Shelf from './parts/Shelf.js';
 import FileButtons from './parts/ActionBar.js';
 import './Editor.scss'
 
+import ground_fill from './parts/icons/toolbar/ground_filled.svg';
 
 /*
   Editor: The State manager for the level editor
@@ -45,7 +46,7 @@ class Editor extends Component {
   }
 
   click = (x, y) => {
-    this.state.cur_level.set(x, y, 1);
+    this.state.cur_level.set(x, y, ground_fill);
     console.log("CLICKED!!")
     this.setState(prev => ({cur_level: prev.cur_level}));
     console.log(this.state.cur_level)

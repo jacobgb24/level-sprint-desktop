@@ -30,12 +30,14 @@ const TileGrid = props => {
 const Row = props => {
   let tiles = [];
   for (let i = 0; i < props.level.length; i++) {
+    console.log(props.level.get(i, props.row))
     tiles.push(
       <Tile
         x={i}
         y={props.row}
         click={props.click}
         key={i}
+        value={props.level.get(i, props.row)}
       />
     );
   }
@@ -60,8 +62,10 @@ class Tile extends Component {
   }
 
   render() {
+    console.log(this.props.value)
     return (
       <img
+        src={this.props.value}
         className="Tile"
         onClick={this.click}
       />

@@ -5,12 +5,16 @@
   background-color: $mdc-theme-background;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0px 48px;
 }
 
 .editor-left {
-  flex: 1 1 75%;
+  // flex: 3 0 0px;
+  padding-right: 0px;
 }
 
 .editor-shelf {
-  flex: 0 1 25%;
+  // flex: 1 0 0px;
 }

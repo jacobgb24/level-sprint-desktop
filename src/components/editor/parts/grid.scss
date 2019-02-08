@@ -3,6 +3,14 @@
 @import "@material/button/mixins";
 
 .Tile {
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
+}
+
+.editor-grid {
+  display: inline-block;
+  background-color: $mdc-theme-surface;
+  border-color: $mdc-theme-primary;
+  border-width: medium;
+  border-style: solid;
 }

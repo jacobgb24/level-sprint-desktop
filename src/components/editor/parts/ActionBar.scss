@@ -13,19 +13,23 @@
 .button-new {  // this bad boy has an auto left margin so it goes as far right as it can.
   @include colored-button;
   margin-left: auto;
+  margin-right: 0px;
 }
 
 .Buttons {
   display: flex;
-  width: vw;
   background-color: $mdc-theme-background;
 }
 
 .level-name {
   align-self: center;
-  margin-left: 24px;
+  // margin-left: 24px;
   @include mdc-text-field-caret-color($mdc-theme-secondary)
   @include mdc-text-field-ink-color(#FFFFFF)
   @include mdc-text-field-outline-color($mdc-theme-primary)
+}
 
+.level-name-input {
+  font-family: 'Roboto';
+  font-weight: 300;
 }

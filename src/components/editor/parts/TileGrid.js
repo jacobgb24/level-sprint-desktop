@@ -20,7 +20,7 @@ const TileGrid = props => {
       />
     );
   }
-  return <div> {rows} </div>
+  return <div className="editor-grid"> {rows} </div>
 }
 
 

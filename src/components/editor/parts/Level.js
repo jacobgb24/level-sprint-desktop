@@ -3,10 +3,10 @@ import ground_line from './icons/toolbar/ground_outlined.svg';
 
 class Level {
   constructor() {
-    this.height = 8;
-    this.min_height = 8;
-    this.length = 11;
-    this.min_length = 11;
+    this.height = 10;
+    this.min_height = 10;
+    this.length = 16;
+    this.min_length = 16;
     this.name = "Unnamed Level...";
     this.data = math.matrix();
     this.resize()

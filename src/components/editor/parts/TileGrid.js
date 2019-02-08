@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {ScrollBox, ScrollAxes, FastTrack} from 'react-scroll-box';
 
 import './grid.scss'
 
@@ -20,7 +21,13 @@ const TileGrid = props => {
       />
     );
   }
-  return <div className="editor-grid"> {rows} </div>
+  return (
+    <div className="grid-container">
+      <div className="grid-scroll-layer scroll-bar">
+        <div className="editor-grid"> {rows} </div>
+      </div>
+    </div>
+  );
 }
 
 
@@ -42,7 +49,7 @@ const Row = props => {
     );
   }
 
-  return <div> {tiles} </div>
+  return <div className="editor-row"> {tiles} </div>
 }
 
 

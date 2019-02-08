@@ -22,7 +22,7 @@ class Editor extends Component {
   render() {
     return (
       <div className="editor-container">
-        <div className="editor-left">
+        <div className="editor-center">
           <FileButtons className="editor-buttons"/>
           <TileGrid
             className="editor-grid"

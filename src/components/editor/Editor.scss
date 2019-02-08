@@ -1,12 +1,10 @@
 @import 'colors.scss';
 @import "@material/typography/mdc-typography";
 
-.editor-bg {
-  background-color: $mdc-theme-background;
+.editor-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 100%;
   padding: 0px 48px;
 }
 

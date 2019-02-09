@@ -1,5 +1,6 @@
 import * as math from 'mathjs'
-import ground_line from './icons/toolbar/ground_outlined.svg';
+
+import {ground_line, ground_fill, spawn_fill} from 'images';
 
 class Level {
   constructor() {
@@ -14,7 +15,6 @@ class Level {
 
   set(x, y, value) {
     this.data.subset(math.index(y, x), value);
-    // console.log(this.data)
   }
 
   get(x, y) {
@@ -68,7 +68,29 @@ class Level {
   }
 }
 
+class DefaultLevel extends Level {
+  constructor() {
+    super();
+    this.build_default();
+  }
+
+  build_default() {
+    for (let y=0; y<3; y++) {
+      for (let x=0; x<7; x++) {
+        this.set(x, y, ground_fill);
+      }
+
+      for (let x=9; x<16; x++) {
+        this.set(x, y, ground_fill);
+      }
+    }
+
+    this.set(1, 3, spawn_fill);
+  }
+}
+
 export default Level;
+export {Level, DefaultLevel};
 
 /*
   LEVEL OBJECT IDs:

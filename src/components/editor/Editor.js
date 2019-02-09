@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 
-import Level from './parts/Level.js'
+import {Level, DefaultLevel} from './parts/Level.js'
 import TileGrid from './parts/TileGrid.js';
 import Shelf from './parts/Shelf.js';
 import FileButtons from './parts/ActionBar.js';
 import './Editor.scss'
 
-import ground_fill from './parts/icons/toolbar/ground_filled.svg';
-
+import {ground_fill} from 'images';
 /*
   Editor: The State manager for the level editor
   (Game board, shelf, and file buttons).
@@ -16,7 +15,7 @@ class Editor extends Component {
   state = {
     active_tool: 0,
     active_object: -1,
-    cur_level: new Level()
+    cur_level: new DefaultLevel()
   };
 
   render() {

@@ -7,28 +7,7 @@ import "@material/image-list/mdc-image-list.scss";
 import './shelf.scss'
 
 // Icon Imports
-import ground_line from './icons/toolbar/ground_outlined.svg';
-import ground_fill from './icons/toolbar/ground_filled.svg';
-import slope_line from './icons/toolbar/slope_outlined.svg';
-import slope_fill from './icons/toolbar/slope_filled.svg';
-import hazard_line from './icons/toolbar/hazard_outlined.svg';
-import hazard_fill from './icons/toolbar/hazard_filled.svg';
-
-import place_line from './icons/toolbar/place_outlined.svg';
-import place_fill from './icons/toolbar/place_filled.svg';
-import delete_line from './icons/toolbar/delete_outlined.svg';
-import delete_fill from './icons/toolbar/delete_filled.svg';
-
-// DUMMY Icons
-import spawn_line from './icons/dummy/spawn_outlined.png';
-import spawn_fill from './icons/dummy/spawn_filled.png';
-import goal_line from './icons/dummy/goal_outlined.png';
-import goal_fill from './icons/dummy/goal_filled.png';
-import npc_line from './icons/dummy/npc_outlined.png';
-import npc_fill from './icons/dummy/npc_filled.png';
-
-import move_line from './icons/dummy/move_outlined.png';
-import move_fill from './icons/dummy/move_outlined.png';
+import * as image from 'images';
 
 
 /*
@@ -38,17 +17,17 @@ import move_fill from './icons/dummy/move_outlined.png';
 class Shelf extends Component {
   state = {
     objects:[
-      ['Ground', ground_line, ground_fill],
-      ['Hill', slope_line, slope_fill],
-      ['Hazard', hazard_line, hazard_fill],
-      ['Spawn', spawn_line, spawn_fill],
-      ['Goal', goal_line, goal_fill],
-      ['NPC', npc_line, npc_fill]
+      ['Ground', image.ground_line, image.ground_fill],
+      ['Hill', image.slope_line, image.slope_fill],
+      ['Hazard', image.hazard_line, image.hazard_fill],
+      ['Spawn', image.spawn_line, image.spawn_fill],
+      ['Goal', image.goal_line, image.goal_fill],
+      ['NPC', image.npc_line, image.npc_fill]
     ],
     tools: [
-      ['Place', place_line, place_fill],
-      ['Move', move_line, move_fill],
-      ['Delete', delete_line, delete_fill]
+      ['Place', image.place_line, image.place_fill],
+      ['Move', image.move_line, image.move_fill],
+      ['Delete', image.delete_line, image.delete_fill]
     ],
   }
 

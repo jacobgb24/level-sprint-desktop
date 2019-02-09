@@ -3,15 +3,26 @@ import {ScrollBox, ScrollAxes, FastTrack} from 'react-scroll-box';
 
 import './grid.scss'
 
-import ground_line from './icons/toolbar/ground_outlined.svg';
-import ground_fill from './icons/toolbar/ground_filled.svg';
+import {ground_line, ground_fill} from 'images';
+
+
+var down = false;
+document.documentElement.onmousedown = () => {
+  down = true;
+}
+
+document.documentElement.onmouseup = () => {
+  down = false;
+}
+
+
 
 /*
   Board: A dynamically sizeable level board.
 */
 const TileGrid = props => {
   let rows = [];
-  for (let i = 0; i < props.level.height; i++) {
+  for (let i = props.level.height-1; i >= 0; i--) {
     rows.push(
       <Row
         level={props.level}
@@ -57,15 +68,14 @@ const Row = props => {
   Tile: A single game tile.
 */
 class Tile extends Component {
-  state = {
-    tilepaths: [
-      ground_line,
-      ground_fill
-    ],
-  };
+  over = () => {
+    if (down) {
+      this.props.click(this.props.x, this.props.y);
+    }
+  }
 
   click = () => {
-    this.props.click(this.props.x, this.props.y)
+    this.props.click(this.props.x, this.props.y);
   }
 
   render() {
@@ -74,7 +84,8 @@ class Tile extends Component {
       <img
         src={this.props.value}
         className="Tile"
-        onClick={this.click}
+        onMouseDown={this.click}
+        onMouseEnter={this.over}
       />
     )
   }

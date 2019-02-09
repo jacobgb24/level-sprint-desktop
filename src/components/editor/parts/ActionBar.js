@@ -6,8 +6,6 @@ import './ActionBar.scss'
 /*
   ActionBar: The set of buttons to save/load/create levels and the level name field
 */
-
-
 class ActionBar extends Component {
   state = {level_name: ''}
   render() {

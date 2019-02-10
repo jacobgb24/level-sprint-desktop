@@ -8,7 +8,7 @@ import './shelf.scss'
 
 // Icon Imports
 import * as image from 'images';
-
+import HelpDialog from '../helpDialogs/Dialog.js'
 
 /*
   Shelf: The set of objects, tools and options on the right-hand
@@ -29,14 +29,43 @@ class Shelf extends Component {
       ['Move', image.move_line, image.move_fill],
       ['Delete', image.delete_line, image.delete_fill]
     ],
+    showObjectsHelp: false,
+    showToolsHelp: false,
+    showDimsHelp: false,
   }
+  toggleObjectsDialog() {
+    console.log("objects dialog button clicked")
+    this.setState({showObjectsHelp: !this.state.showObjectsHelp});
+  }
+  toggleToolsDialog() {
+    this.setState({showToolsHelp: !this.state.showToolsHelp});
+  }
+  toggleDimsDialog() {
+    this.setState({showDimsHelp: !this.state.showDimsHelp});
+  }
+
 
   render() {
     return (
       <div className="Shelf">
+        <div>
+          {this.state.showObjectsHelp ?
+            <HelpDialog title="Objects Help"/>
+            : null
+          }
+          {this.state.showToolsHelp ?
+            <HelpDialog title="Tools Help"/>
+            : null
+          }
+          {this.state.showDimsHelp ?
+            <HelpDialog title="Dimensions Help"/>
+            : null
+          }
+        </div>
         <div className="LevelObjects">
           <ShelfSet
             name="Level Objects"
+            helpFunc={this.toggleObjectsDialog.bind(this)}
             items={this.state.objects}
             active={this.props.activeObject}
           />
@@ -45,6 +74,7 @@ class Shelf extends Component {
         <div className="Tools">
           <ShelfSet
             name="Tools"
+            helpFunc={this.toggleToolsDialog.bind(this)}
             items={this.state.tools}
             active={this.props.activeTool}
           />
@@ -53,12 +83,17 @@ class Shelf extends Component {
         <div className="LevelResizer">
           <LevelResizer
             name="Level Dimensions"
+            helpFunc={this.toggleDimsDialog.bind(this)}
             addColumn={this.props.addColumn}
             removeColumn={this.props.removeColumn}
             addRow={this.props.addRow}
             removeRow={this.props.removeRow}
             cols={this.props.cols}
             rows={this.props.rows}
+            canAddCols={this.props.canAddCols}
+            canAddRows={this.props.canAddRows}
+            canRemoveCols={this.props.canRemoveCols}
+            canRemoveRows={this.props.canRemoveRows}
           />
         </div>
       </div>
@@ -73,10 +108,18 @@ class Shelf extends Component {
 const LevelResizer = props => {
   return (
     <div>
-      <h2 className="shelfset-name">{props.name}</h2>
+      <div className="shelfset-header">
+        <h2 className="shelfset-name">{props.name}</h2>
+          <IconButton onClick={props.helpFunc}
+            className="shelfset-help">
+            <MaterialIcon icon="help_outline"/>
+          </IconButton>
+      </div>
       <LevelDimension
         remove={props.removeColumn}
         add={props.addColumn}
+        canAdd={props.canAddCols}
+        canRemove={props.canRemoveCols}
         value={props.cols}
         name="columns"
       />
@@ -84,6 +127,8 @@ const LevelResizer = props => {
       <LevelDimension
         remove={props.removeRow}
         add={props.addRow}
+        canAdd={props.canAddRows}
+        canRemove={props.canRemoveRows}
         value={props.rows}
         name="rows"
       />
@@ -100,11 +145,15 @@ const LevelDimension = props => {
     <div>
       <h4 className="dimension-direction">{props.name}</h4>
       <div className="dimensions-selector">
-        <IconButton onClick={props.remove} className="dimension-button">
+        <IconButton onClick={props.remove}
+          className="dimension-button"
+          disabled={!props.canRemove}>
           <MaterialIcon icon="remove_circle_outline"/>
         </IconButton>
         <h2 className="dimension-value">{props.value}</h2>
-        <IconButton onClick={props.add} className="dimension-button">
+        <IconButton onClick={props.add}
+          className="dimension-button"
+          disabled={!props.canAdd}>
           <MaterialIcon icon="add_circle_outline"/>
         </IconButton>
       </div>
@@ -146,7 +195,13 @@ class ShelfSet extends Component {
 
     return (
       <div>
-        <h2 className="shelfset-name">{this.props.name}</h2>
+        <div className="shelfset-header">
+          <h2 className="shelfset-name">{this.props.name}</h2>
+            <IconButton onClick={this.props.helpFunc}
+              className="shelfset-help">
+              <MaterialIcon icon="help_outline"/>
+            </IconButton>
+        </div>
         <ul className="mdc-image-list shelfset">
           {items}
         </ul>

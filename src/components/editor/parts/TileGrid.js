@@ -48,7 +48,7 @@ const TileGrid = props => {
 const Row = props => {
   let tiles = [];
   for (let i = 0; i < props.level.length; i++) {
-    console.log(props.level.get(i, props.row))
+    // console.log(props.level.get(i, props.row))
     tiles.push(
       <Tile
         x={i}
@@ -79,7 +79,7 @@ class Tile extends Component {
   }
 
   render() {
-    console.log(this.props.value)
+    // console.log(this.props.value)
     return (
       <img
         src={this.props.value}

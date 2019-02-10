@@ -8,9 +8,15 @@ class Level {
     this.min_height = 10;
     this.length = 16;
     this.min_length = 16;
-    this.name = "Unnamed Level...";
+    this.name = "Unnamed Level";
+    this.max_tiles = 1024
     this.data = math.matrix();
     this.resize()
+
+    this.can_add_col = true
+    this.can_add_row = true
+    this.can_remove_col = false
+    this.can_remove_row = false
   }
 
   set(x, y, value) {
@@ -18,16 +24,18 @@ class Level {
   }
 
   get(x, y) {
-    console.log(x,y)
-    console.log(math.subset(this.data, math.index(y, x)))
-
+    // console.log(x,y)
+    // console.log(math.subset(this.data, math.index(y, x)))
     return math.subset(this.data, math.index(y, x));
 
   }
 
   addRow() {
-    this.height += 1;
-    this.resize();
+    if (!((this.height + 1) * this.length > this.max_tiles)) {
+      this.height += 1;
+      this.resize();
+    }
+    this.checkAddRemove();
   }
 
   removeRow() {
@@ -35,11 +43,15 @@ class Level {
       this.height -= 1;
       this.resize();
     }
+    this.checkAddRemove();
   }
 
   addColumn() {
-    this.length += 1;
-    this.resize();
+    if (!((this.length + 1) * this.height > this.max_tiles)) {
+      this.length += 1;
+      this.resize();
+    }
+    this.checkAddRemove();
   }
 
   removeColumn() {
@@ -47,7 +59,17 @@ class Level {
       this.length -= 1;
       this.resize();
     }
+    this.checkAddRemove();
   }
+
+  checkAddRemove() {
+    this.can_add_row = !((this.height + 1) * this.length > this.max_tiles);
+    this.can_remove_row = this.height > this.min_height;
+    this.can_add_col = !((this.length + 1) * this.height > this.max_tiles);
+    this.can_remove_col = this.length > this.min_length;
+    // console.log(this.can_add_row, this.can_add_col, this.can_remove_row, this.can_remove_col)
+  }
+
 
   setLength(length) {
     this.length = length;

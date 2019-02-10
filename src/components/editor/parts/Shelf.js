@@ -8,7 +8,11 @@ import './shelf.scss'
 
 // Icon Imports
 import * as image from 'images';
+import ObjectHelp from '../helpDialogs/ObjectHelp.js'
 import HelpDialog from '../helpDialogs/Dialog.js'
+import ToolHelp from '../helpDialogs/ToolHelp.js'
+import DimHelp from '../helpDialogs/DimHelp.js'
+
 
 /*
   Shelf: The set of objects, tools and options on the right-hand
@@ -34,7 +38,6 @@ class Shelf extends Component {
     showDimsHelp: false,
   }
   toggleObjectsDialog() {
-    console.log("objects dialog button clicked")
     this.setState({showObjectsHelp: !this.state.showObjectsHelp});
   }
   toggleToolsDialog() {
@@ -48,17 +51,17 @@ class Shelf extends Component {
   render() {
     return (
       <div className="Shelf">
-        <div>
+        <div> {/* Just a wrapper for showing all the help dialogs*/}
           {this.state.showObjectsHelp ?
-            <HelpDialog title="Objects Help"/>
+            <HelpDialog title="Objects Help" content={<ObjectHelp/>}/>
             : null
           }
           {this.state.showToolsHelp ?
-            <HelpDialog title="Tools Help"/>
+            <HelpDialog title="Tools Help" content={<ToolHelp/>}/>
             : null
           }
           {this.state.showDimsHelp ?
-            <HelpDialog title="Dimensions Help"/>
+            <HelpDialog title="Dimensions Help" content={<DimHelp/>}/>
             : null
           }
         </div>

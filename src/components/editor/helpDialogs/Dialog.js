@@ -13,10 +13,10 @@ class HelpDialog extends Component {
 
   render() {
     return (
-      <Dialog open={this.state.isOpen}>
+      <Dialog open={this.state.isOpen} className="Dialog">
         <DialogTitle>{this.props.title}</DialogTitle>
         <DialogContent>
-          <h1>HI</h1> //TODO: Create static components for each help. Load here from props
+          {this.props.content}
         </DialogContent>
         <DialogFooter>
           <DialogButton action='accept' isDefault>GOT IT</DialogButton>

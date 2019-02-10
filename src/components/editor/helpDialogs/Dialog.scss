@@ -1,1 +1,7 @@
 @import '@material/react-dialog/index.scss';
+
+@import 'colors.scss';
+
+.Dialog {
+  @include mdc-dialog-container-fill-color($mdc-theme-surface)
+}

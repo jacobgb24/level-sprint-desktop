@@ -53,15 +53,18 @@ class Shelf extends Component {
       <div className="Shelf">
         <div> {/* Just a wrapper for showing all the help dialogs*/}
           {this.state.showObjectsHelp ?
-            <HelpDialog title="Objects Help" content={<ObjectHelp/>}/>
+            <HelpDialog onClose={this.toggleObjectsDialog.bind(this)}
+              title="Objects Help" content={<ObjectHelp/>}/>
             : null
           }
           {this.state.showToolsHelp ?
-            <HelpDialog title="Tools Help" content={<ToolHelp/>}/>
+            <HelpDialog onClose={this.toggleToolsDialog.bind(this)}
+              title="Tools Help" content={<ToolHelp/>}/>
             : null
           }
           {this.state.showDimsHelp ?
-            <HelpDialog title="Dimensions Help" content={<DimHelp/>}/>
+            <HelpDialog onClose={this.toggleDimsDialog.bind(this)}
+              title="Dimensions Help" content={<DimHelp/>}/>
             : null
           }
         </div>
@@ -124,7 +127,7 @@ const LevelResizer = props => {
         canAdd={props.canAddCols}
         canRemove={props.canRemoveCols}
         value={props.cols}
-        name="columns"
+        name="Columns"
       />
 
       <LevelDimension
@@ -133,7 +136,7 @@ const LevelResizer = props => {
         canAdd={props.canAddRows}
         canRemove={props.canRemoveRows}
         value={props.rows}
-        name="rows"
+        name="Rows"
       />
     </div>
   );

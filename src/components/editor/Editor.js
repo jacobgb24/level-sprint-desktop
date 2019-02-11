@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 
-import {Level, DefaultLevel} from './parts/Level.js'
-import TileGrid from './parts/TileGrid.js';
-import Shelf from './parts/Shelf.js';
-import FileButtons from './parts/ActionBar.js';
+import {Level, DefaultLevel} from './levelGrid/Level.js'
+import TileGrid from './levelGrid/TileGrid.js';
+import Shelf from './toolbar/Shelf.js';
 import './Editor.scss'
 
 import {ground_fill} from 'images';
@@ -21,14 +20,11 @@ class Editor extends Component {
   render() {
     return (
       <div className="editor-container">
-        <div className="editor-center">
-          <FileButtons className="editor-buttons"/>
           <TileGrid
             className="editor-grid"
             level={this.state.cur_level}
             click={this.click}
           />
-        </div>
         <Shelf
             className="editor-shelf"
             activeObject={this.state.active_object}

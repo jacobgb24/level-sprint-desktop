@@ -4,19 +4,6 @@
 @import '@material/react-icon-button/index.scss';
 @import '@material/image-list/mdc-image-list';
 
-.Shelf {
-  background-color: $mdc-theme-surface;
-  border-color: $mdc-theme-primary;
-  border-width: medium;
-  border-style: solid;
-  margin: 84px 0px 0px 0px;
-  min-width: 188px;
-  width:188px;
-  max-width: 188px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 2px #00000044;
-}
-
 hr {
   border-color: $mdc-theme-primary;
   margin: 0px;

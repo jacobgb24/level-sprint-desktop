@@ -1,0 +1,24 @@
+@import 'colors.scss';
+@import '@material/react-list/index.scss';
+@import '@material/react-text-field/index.scss';
+@import '@material/react-fab/index.scss';
+
+.levelbar-header {
+  padding: 8px;
+  margin-bottom: 0px !important;
+}
+
+.level-list {
+  padding-top: 0px;
+}
+
+.level-list-item {
+  padding-right: 0px;
+}
+
+.level-list-add {
+  float: right;
+  margin: 8px;
+  @include mdc-fab-container-color($mdc-theme-secondary);
+  @include mdc-fab-ink-color($mdc-theme-on-primary);
+}

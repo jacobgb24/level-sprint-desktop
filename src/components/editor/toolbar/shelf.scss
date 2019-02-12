@@ -1,49 +1,15 @@
 @import 'colors.scss';
 @import "@material/react-button/index.scss";
-@import "@material/button/mixins";
+@import "@material/image-list/mdc-image-list.scss";
 @import '@material/react-icon-button/index.scss';
 @import '@material/image-list/mdc-image-list';
 
-hr {
-  border-color: $mdc-theme-primary;
-  margin: 0px;
-}
-
-.LevelObjects {
-  // background-color: #FF8888;
-  padding: 8px;
-}
-
-.Tools {
-  // background-color: #88FF88;
-  padding: 8px;
-}
-
-.LevelResizer {
-  // background-color: #8888FF;
-  padding: 8px;
-}
-
-.shelfset-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 0px;
-  margin-bottom: 16px;
-}
-
-.shelfset-name {
-  font-family: 'Roboto';
-  font-size: 18px;
-  margin: 0px;
-}
-
-.shelfset-help {
-  margin-left: auto;
-  @include mdc-icon-button-size(24px, 24px, 0px)
-}
 
 .shelfset {
+  padding: 8px;
+}
+
+.shelfset-list {
   @include mdc-image-list-standard-columns(3);
 }
 
@@ -55,8 +21,8 @@ hr {
   margin: auto;
 }
 
-.dimension-button {
-  @include mdc-icon-button-size(24px, 24px, 0px)
+.dimension-button { //TODO: this is getting overridden somehow
+  @include mdc-icon-button-size(24px, 24px, 0px);
 }
 
 .dimensions-selector {

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import IconButton from '@material/react-icon-button';
 import MaterialIcon from '@material/react-material-icon';
-import "@material/image-list/mdc-image-list.scss";
 
 
 import './shelf.scss'
@@ -50,7 +49,7 @@ class Shelf extends Component {
 
   render() {
     return (
-      <div className="Shelf">
+      <div className="editor-shelf">
         <div> {/* Just a wrapper for showing all the help dialogs*/}
           {this.state.showObjectsHelp ?
             <HelpDialog onClose={this.toggleObjectsDialog.bind(this)}
@@ -113,7 +112,7 @@ class Shelf extends Component {
 */
 const LevelResizer = props => {
   return (
-    <div>
+    <div className="shelfset">
       <div className="shelfset-header">
         <h2 className="shelfset-name">{props.name}</h2>
           <IconButton onClick={props.helpFunc}
@@ -200,7 +199,7 @@ class ShelfSet extends Component {
     }
 
     return (
-      <div>
+      <div className="shelfset">
         <div className="shelfset-header">
           <h2 className="shelfset-name">{this.props.name}</h2>
             <IconButton onClick={this.props.helpFunc}
@@ -208,7 +207,7 @@ class ShelfSet extends Component {
               <MaterialIcon icon="help_outline"/>
             </IconButton>
         </div>
-        <ul className="mdc-image-list shelfset">
+        <ul className="mdc-image-list shelfset-list">
           {items}
         </ul>
       </div>

@@ -1,5 +1,6 @@
 @import 'colors.scss';
 @import "@material/typography/mdc-typography";
+@import '@material/react-icon-button/index.scss';
 
 .editor-container {
   display: flex;
@@ -11,22 +12,60 @@
 
 .grid-container {
   // margin-right: 24px;
+  max-width: 67vw;
+  max-height: 67vh;
   margin: 0px;
   padding: 4px 4px 4px 4px;
   background-color: $mdc-theme-primary;
   border-radius: 8px;
   box-shadow: 0px 1px 1px #00000088;
+  flex-basis: 8;
+  flex-shrink: 6;
 }
 
-.Shelf {
+
+.editor-shelf {
+  flex-shrink: 0;
+  flex-basis: 2;
+  margin: 0px;
+  min-width: 200px;
+  width:200px;
+  max-width: 200px;
   background-color: $mdc-theme-surface;
   border-color: $mdc-theme-primary;
   border-width: medium;
   border-style: solid;
-  margin: 0px;
-  min-width: 188px;
-  width:188px;
-  max-width: 188px;
   border-radius: 8px;
   box-shadow: 0px 2px 2px #00000044;
+}
+
+// GENERIC SHELF COMPONENTS:
+
+hr {
+  border-color: $mdc-theme-primary;
+  margin: 0px;
+}
+
+
+.shelf-bg {
+
+}
+
+.shelfset-name {
+  font-family: 'Roboto';
+  font-size: 18px;
+  margin: 0px;
+}
+
+.shelfset-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0px;
+  margin-bottom: 16px;
+}
+
+.shelfset-help {
+  margin-left: auto;
+  @include mdc-icon-button-size(24px, 24px, 4px)
 }

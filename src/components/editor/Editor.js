@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import {Level, DefaultLevel} from './levelGrid/Level.js'
+import LevelShelf from './levelBar/LevelShelf.js'
 import TileGrid from './levelGrid/TileGrid.js';
 import Shelf from './toolbar/Shelf.js';
 import './Editor.scss'
@@ -20,28 +21,30 @@ class Editor extends Component {
   render() {
     return (
       <div className="editor-container">
+          <LevelShelf className="editor-shelf" />
           <TileGrid
             className="editor-grid"
             level={this.state.cur_level}
             click={this.click}
           />
-        <Shelf
-            className="editor-shelf"
-            activeObject={this.state.active_object}
-            activeTool={this.state.active_tool}
 
-            addColumn={this.addColumn}
-            removeColumn={this.removeColumn}
-            addRow={this.addRow}
-            removeRow={this.removeRow}
-            cols={this.state.cur_level.length}
-            rows={this.state.cur_level.height}
-            canAddCols={this.state.cur_level.can_add_col}
-            canAddRows={this.state.cur_level.can_add_row}
-            canRemoveCols={this.state.cur_level.can_remove_col}
-            canRemoveRows={this.state.cur_level.can_remove_row}
+          <Shelf
+              className="editor-shelf"
+              activeObject={this.state.active_object}
+              activeTool={this.state.active_tool}
 
-          />
+              addColumn={this.addColumn}
+              removeColumn={this.removeColumn}
+              addRow={this.addRow}
+              removeRow={this.removeRow}
+              cols={this.state.cur_level.length}
+              rows={this.state.cur_level.height}
+              canAddCols={this.state.cur_level.can_add_col}
+              canAddRows={this.state.cur_level.can_add_row}
+              canRemoveCols={this.state.cur_level.can_remove_col}
+              canRemoveRows={this.state.cur_level.can_remove_row}
+
+            />
       </div>
     );
   }

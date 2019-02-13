@@ -2,78 +2,91 @@ import React, {Component} from 'react';
 
 import {Level, DefaultLevel} from './levelGrid/Level.js'
 import LevelShelf from './levelBar/LevelShelf.js'
-import TileGrid from './levelGrid/TileGrid.js';
+import Grid from './levelGrid/Grid.js';
 import Shelf from './toolbar/Shelf.js';
 import './Editor.scss'
 
-import {ground_fill} from 'images';
+import {ground, hill, hazard, spawn, goal, npc, blank} from 'images';
 /*
   Editor: The State manager for the level editor
   (Game board, shelf, and file buttons).
 */
 class Editor extends Component {
   state = {
-    active_tool: 0,
-    active_object: -1,
-    cur_level: new DefaultLevel()
+    activeTool: 0,
+    activeObject: 0,
+    objects: [ground, hill, hazard, spawn, goal, npc, blank],
+    curLevel: new DefaultLevel(),
+    levels: []
   };
 
   render() {
     return (
       <div className="editor-container">
           <LevelShelf className="editor-shelf" />
-          <TileGrid
+          <Grid
             className="editor-grid"
-            level={this.state.cur_level}
-            click={this.click}
+            level={this.state.curLevel}
+            click={this.placeObject}
           />
 
           <Shelf
               className="editor-shelf"
-              activeObject={this.state.active_object}
-              activeTool={this.state.active_tool}
-
+              activeObject={this.state.activeObject}
+              activeTool={this.state.activeTool}
               addColumn={this.addColumn}
               removeColumn={this.removeColumn}
               addRow={this.addRow}
               removeRow={this.removeRow}
-              cols={this.state.cur_level.length}
-              rows={this.state.cur_level.height}
-              canAddCols={this.state.cur_level.can_add_col}
-              canAddRows={this.state.cur_level.can_add_row}
-              canRemoveCols={this.state.cur_level.can_remove_col}
-              canRemoveRows={this.state.cur_level.can_remove_row}
-
+              cols={this.state.curLevel.length}
+              rows={this.state.curLevel.height}
+              canAddCols={this.state.curLevel.canAddCol}
+              canAddRows={this.state.curLevel.canAddRow}
+              canRemoveCols={this.state.curLevel.canRemoveCol}
+              canRemoveRows={this.state.curLevel.canRemoveRow}
+              changeTool={this.changeTool}
+              changeObject={this.changeObject}
             />
       </div>
     );
   }
 
-  click = (x, y) => {
-    this.state.cur_level.set(x, y, ground_fill);
-    // console.log("CLICKED!!")
-    this.setState(prev => ({cur_level: prev.cur_level}));
-    // console.log(this.state.cur_level)
+  placeObject = (x, y) => {
+    let obj = this.state.objects[this.state.activeObject]
+    this.state.curLevel.set(x, y, obj);
+    this.setState(prev => ({curLevel: prev.curLevel}));
+  }
+
+  changeObject = (index) => {
+    this.setState(prev => ({activeObject: index}))
+    this.changeTool(0);
+  }
+
+  changeTool = (index) => {
+    this.setState(prev => ({activeTool: index}))
+    if (index != 0) {
+      this.setState(prev => ({activeObject: 6}))
+    }
   }
 
   addColumn = () => {
-    this.state.cur_level.addColumn();
-    this.setState(prev => ({cur_level: prev.cur_level}));
+    this.state.curLevel.addColumn();
+    this.setState(prev => ({curLevel: prev.curLevel}));
   };
 
   removeColumn = () => {
-    this.state.cur_level.removeColumn();
-    this.setState(prev => ({cur_level: prev.cur_level}));
+    this.state.curLevel.removeColumn();
+    this.setState(prev => ({curLevel: prev.curLevel}));
   };
 
   addRow = () => {
-    this.state.cur_level.addRow();
-    this.setState(prev => ({cur_level: prev.cur_level}));
+    this.state.curLevel.addRow();
+    this.setState(prev => ({curLevel: prev.curLevel}));
   };
 
   removeRow = () => {
-    this.state.cur_level.removeRow();
-    this.setState(prev => ({cur_level: prev.cur_level}));
+    this.state.curLevel.removeRow();
+    this.setState(prev => ({curLevel: prev.curLevel}));
   };
 }
 

@@ -2,6 +2,6 @@
 
 @import 'colors.scss';
 
-.Dialog {
+.dialog {
   @include mdc-dialog-container-fill-color($mdc-theme-surface)
 }

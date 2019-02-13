@@ -7,13 +7,14 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 64px 64px 24px 64px;
+  margin: auto;
+  padding: 12px;
 }
 
 .grid-container {
   // margin-right: 24px;
-  max-width: 67vw;
-  max-height: 67vh;
+  max-width: 60vw;
+  max-height: 60vh;
   margin: 0px;
   padding: 4px 4px 4px 4px;
   background-color: $mdc-theme-primary;
@@ -23,13 +24,15 @@
   flex-shrink: 6;
 }
 
+.editor-grid {
+  flex-grow: 8;
+}
 
 .editor-shelf {
-  flex-shrink: 0;
-  flex-basis: 2;
+  flex-grow: 2;
   margin: 0px;
-  min-width: 200px;
-  width:200px;
+  min-width: 160px;
+  width: 160px;
   max-width: 200px;
   background-color: $mdc-theme-surface;
   border-color: $mdc-theme-primary;

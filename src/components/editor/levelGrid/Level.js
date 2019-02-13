@@ -1,22 +1,22 @@
 import * as math from 'mathjs'
 
-import {ground_line, ground_fill, spawn_fill} from 'images';
+import {blank, ground, spawn} from 'images';
 
 class Level {
   constructor() {
     this.height = 10;
-    this.min_height = 10;
+    this.minHeight = 10;
     this.length = 16;
-    this.min_length = 16;
+    this.minLength = 16;
     this.name = "Unnamed Level";
-    this.max_tiles = 1024
+    this.maxTiles = 1024
     this.data = math.matrix();
     this.resize()
 
-    this.can_add_col = true
-    this.can_add_row = true
-    this.can_remove_col = false
-    this.can_remove_row = false
+    this.canAddCol = true
+    this.canAddRow = true
+    this.canRemoveCol = false
+    this.canRemoveRow = false
   }
 
   set(x, y, value) {
@@ -31,7 +31,7 @@ class Level {
   }
 
   addRow() {
-    if (!((this.height + 1) * this.length > this.max_tiles)) {
+    if (!((this.height + 1) * this.length > this.maxTiles)) {
       this.height += 1;
       this.resize();
     }
@@ -39,7 +39,7 @@ class Level {
   }
 
   removeRow() {
-    if (this.height > this.min_height) {
+    if (this.height > this.minHeight) {
       this.height -= 1;
       this.resize();
     }
@@ -47,7 +47,7 @@ class Level {
   }
 
   addColumn() {
-    if (!((this.length + 1) * this.height > this.max_tiles)) {
+    if (!((this.length + 1) * this.height > this.maxTiles)) {
       this.length += 1;
       this.resize();
     }
@@ -55,7 +55,7 @@ class Level {
   }
 
   removeColumn() {
-    if (this.length > this.min_length) {
+    if (this.length > this.minLength) {
       this.length -= 1;
       this.resize();
     }
@@ -63,11 +63,11 @@ class Level {
   }
 
   checkAddRemove() {
-    this.can_add_row = !((this.height + 1) * this.length > this.max_tiles);
-    this.can_remove_row = this.height > this.min_height;
-    this.can_add_col = !((this.length + 1) * this.height > this.max_tiles);
-    this.can_remove_col = this.length > this.min_length;
-    // console.log(this.can_add_row, this.can_add_col, this.can_remove_row, this.can_remove_col)
+    this.canAddRow = !((this.height + 1) * this.length > this.maxTiles);
+    this.canRemoveRow = this.height > this.minHeight;
+    this.canAddCol = !((this.length + 1) * this.height > this.maxTiles);
+    this.canRemoveCol = this.length > this.minLength;
+    // console.log(this.canAddRow, this.canAddCol, this.canRemoveRow, this.canRemoveCol)
   }
 
 
@@ -82,7 +82,7 @@ class Level {
   }
 
   resize() {
-    this.data.resize([this.height, this.length], ground_line);
+    this.data.resize([this.height, this.length], blank);
   }
 
   rename(name) {
@@ -99,15 +99,15 @@ class DefaultLevel extends Level {
   build_default() {
     for (let y=0; y<3; y++) {
       for (let x=0; x<7; x++) {
-        this.set(x, y, ground_fill);
+        this.set(x, y, ground);
       }
 
       for (let x=9; x<16; x++) {
-        this.set(x, y, ground_fill);
+        this.set(x, y, ground);
       }
     }
 
-    this.set(1, 3, spawn_fill);
+    this.set(1, 3, spawn);
   }
 }
 

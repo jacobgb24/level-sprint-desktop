@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import IconButton from '@material/react-icon-button';
+import IconButton, {IconToggle} from '@material/react-icon-button';
 import MaterialIcon from '@material/react-material-icon';
+import SvgIcon from '@material-ui/core/SvgIcon';
 
-
-import './shelf.scss'
+import './Shelf.scss'
 
 // Icon Imports
 import * as image from 'images';
@@ -21,7 +21,7 @@ class Shelf extends Component {
   state = {
     objects:[
       ['Ground', image.ground_line, image.ground_fill],
-      ['Hill', image.slope_line, image.slope_fill],
+      ['Hill', image.hill_line, image.hill_fill],
       ['Hazard', image.hazard_line, image.hazard_fill],
       ['Spawn', image.spawn_line, image.spawn_fill],
       ['Goal', image.goal_line, image.goal_fill],
@@ -36,33 +36,35 @@ class Shelf extends Component {
     showToolsHelp: false,
     showDimsHelp: false,
   }
-  toggleObjectsDialog() {
+
+  toggleObjectsDialog = () => {
     this.setState({showObjectsHelp: !this.state.showObjectsHelp});
   }
-  toggleToolsDialog() {
+
+  toggleToolsDialog = () => {
     this.setState({showToolsHelp: !this.state.showToolsHelp});
   }
-  toggleDimsDialog() {
+
+  toggleDimsDialog = () => {
     this.setState({showDimsHelp: !this.state.showDimsHelp});
   }
-
 
   render() {
     return (
       <div className="editor-shelf">
         <div> {/* Just a wrapper for showing all the help dialogs*/}
           {this.state.showObjectsHelp ?
-            <HelpDialog onClose={this.toggleObjectsDialog.bind(this)}
+            <HelpDialog onClose={this.toggleObjectsDialog}
               title="Objects Help" content={<ObjectHelp/>}/>
             : null
           }
           {this.state.showToolsHelp ?
-            <HelpDialog onClose={this.toggleToolsDialog.bind(this)}
+            <HelpDialog onClose={this.toggleToolsDialog}
               title="Tools Help" content={<ToolHelp/>}/>
             : null
           }
           {this.state.showDimsHelp ?
-            <HelpDialog onClose={this.toggleDimsDialog.bind(this)}
+            <HelpDialog onClose={this.toggleDimsDialog}
               title="Dimensions Help" content={<DimHelp/>}/>
             : null
           }
@@ -70,25 +72,27 @@ class Shelf extends Component {
         <div className="LevelObjects">
           <ShelfSet
             name="Level Objects"
-            helpFunc={this.toggleObjectsDialog.bind(this)}
+            helpFunc={this.toggleObjectsDialog}
             items={this.state.objects}
             active={this.props.activeObject}
+            changeShelfItem={this.props.changeObject}
           />
         </div>
         <hr></hr>
         <div className="Tools">
           <ShelfSet
             name="Tools"
-            helpFunc={this.toggleToolsDialog.bind(this)}
+            helpFunc={this.toggleToolsDialog}
             items={this.state.tools}
             active={this.props.activeTool}
+            changeShelfItem={this.props.changeTool}
           />
         </div>
         <hr></hr>
         <div className="LevelResizer">
           <LevelResizer
             name="Level Dimensions"
-            helpFunc={this.toggleDimsDialog.bind(this)}
+            helpFunc={this.toggleDimsDialog}
             addColumn={this.props.addColumn}
             removeColumn={this.props.removeColumn}
             addRow={this.props.addRow}
@@ -167,23 +171,11 @@ const LevelDimension = props => {
 }
 
 /*
-
-*/
-class Button extends Component {
-  handleClick = () => {
-    this.props.onClickFunction();
-  };
-
-  render() {
-    return <button onClick={this.handleClick}>{this.props.label}</button>;
-  }
-}
-
-/*
   ShelfSet: A container for a set of shelf items,
   such as level objects or tools.
 */
 class ShelfSet extends Component {
+
   render() {
     let items = []
     for (let i = 0; i < this.props.items.length; i++) {
@@ -194,6 +186,8 @@ class ShelfSet extends Component {
           icon={icon}
           active={(i === this.props.active)}
           key={i}
+          index={i}
+          changeShelfItem={this.props.changeShelfItem}
         />
       );
     }
@@ -220,31 +214,25 @@ class ShelfSet extends Component {
   Shelf Item: A single item on the shelf,
   such as a level object or tool.
 */
-const ShelfItem = props => {
-  if (props.active) {
+class ShelfItem extends Component {
+
+  click = () => {
+    this.props.changeShelfItem(this.props.index);
+  }
+
+  render() {
+    let cl = this.props.active ? 'active-shelf-item' : 'inactive-shelf-item';
     return (
-      <li className="mdc-image-list__item activeShelfItem">
+      <li className={"mdc-image-list__item " + cl} onClick={this.click}>
         <div className='mdc-image-list__image-aspect-container'>
-          <img className='mdc-image-list__image' src={props.icon} />
+          <img className="mdc-image-list__image" src={this.props.icon} alt={this.props.icon} />
         </div>
-        <div className='mdc-image-list__supporting'>
-          <span className="mdc-image-list__label shelf-item-label">{props.name}</span>
-        </div>
-      </li>
-    );
-  } else {
-    return (
-      <li className="mdc-image-list__item inactiveShelfItem">
-        <div className="mdc-image-list__image-aspect-container">
-          <img className="mdc-image-list__image" src={props.icon} alt={props.icon} />
-        </div>
-        <div className="mdc-image-list__supporting">
-          <span className="mdc-image-list__label shelf-item-label">{props.name}</span>
+        <div className='mdc-image-list__supporting name'>
+          <span className="mdc-image-list__label shelf-item-label">{this.props.name}</span>
         </div>
       </li>
     );
   }
-
 }
 
 export default Shelf;

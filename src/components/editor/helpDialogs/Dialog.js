@@ -13,7 +13,7 @@ class HelpDialog extends Component {
 
   render() {
     return (
-      <Dialog open={this.state.isOpen} className="Dialog" onClose={this.props.onClose}>
+      <Dialog open={this.state.isOpen} className="dialog" onClose={this.props.onClose}>
         <DialogTitle>{this.props.title}</DialogTitle>
         <DialogContent>
           {this.props.content}

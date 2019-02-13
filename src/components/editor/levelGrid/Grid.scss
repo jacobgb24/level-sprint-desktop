@@ -2,7 +2,7 @@
 @import "@material/react-button/index.scss";
 @import "@material/button/mixins";
 
-.Tile {
+.tile {
   width: 42px;
   height: 42px;
   overflow: hidden;
@@ -13,8 +13,7 @@
   -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
-  border: 2px;
-  border-color: $mdc-theme-secondary;
+  border: 1px solid #000A0ABB;
 }
 
 .editor-row {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {ScrollBox, ScrollAxes, FastTrack} from 'react-scroll-box';
 
-import './grid.scss'
+import './Grid.scss'
 
 import {ground_line, ground_fill} from 'images';
 
@@ -20,7 +20,7 @@ document.documentElement.onmouseup = () => {
 /*
   Board: A dynamically sizeable level board.
 */
-const TileGrid = props => {
+const Grid = props => {
   let rows = [];
   for (let i = props.level.height-1; i >= 0; i--) {
     rows.push(
@@ -83,7 +83,7 @@ class Tile extends Component {
     return (
       <img
         src={this.props.value}
-        className="Tile"
+        className="tile"
         onMouseDown={this.click}
         onMouseEnter={this.over}
       />
@@ -91,4 +91,4 @@ class Tile extends Component {
   }
 }
 
-export default TileGrid;
+export default Grid;

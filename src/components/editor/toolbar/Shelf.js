@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import IconButton, {IconToggle} from '@material/react-icon-button';
 import MaterialIcon from '@material/react-material-icon';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import {withRipple} from '@material/react-ripple';
 
 import './Shelf.scss'
 
@@ -180,8 +181,7 @@ class ShelfSet extends Component {
     let items = []
     for (let i = 0; i < this.props.items.length; i++) {
       let icon = this.props.items[i][i === this.props.active ? 2 : 1];
-      items.push(
-        <ShelfItem
+      items.push(<ShelfItem
           name={this.props.items[i][0]}
           icon={icon}
           active={(i === this.props.active)}
@@ -223,7 +223,7 @@ class ShelfItem extends Component {
   render() {
     let cl = this.props.active ? 'active-shelf-item' : 'inactive-shelf-item';
     return (
-      <li className={"mdc-image-list__item " + cl} onClick={this.click}>
+      <li className={"shelf-item mdc-ripple-surface mdc-image-list__item " + cl} onClick={this.click}>
         <div className='mdc-image-list__image-aspect-container'>
           <img className="mdc-image-list__image" src={this.props.icon} alt={this.props.icon} />
         </div>

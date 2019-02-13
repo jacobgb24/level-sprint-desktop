@@ -3,7 +3,13 @@
 @import "@material/image-list/mdc-image-list.scss";
 @import '@material/react-icon-button/index.scss';
 @import '@material/image-list/mdc-image-list';
+@import '@material/react-ripple/index.scss';
 
+.ripple-component {
+  @include mdc-ripple-surface;
+  @include mdc-ripple-radius-bounded;
+  @include mdc-states;
+}
 
 .shelfset {
   padding: 8px;
@@ -50,8 +56,13 @@
   padding: 0px;
 }
 
-.active-shelf-item {
 
+.shelf-item {
+  border-radius: 6px;
+}
+
+.active-shelf-item {
+  border: 2px solid $mdc-theme-secondary;
 }
 
 h4 {

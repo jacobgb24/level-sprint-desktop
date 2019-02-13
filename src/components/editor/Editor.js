@@ -7,6 +7,7 @@ import Shelf from './toolbar/Shelf.js';
 import './Editor.scss'
 
 import {ground, hill, hazard, spawn, goal, npc, blank} from 'images';
+
 /*
   Editor: The State manager for the level editor
   (Game board, shelf, and file buttons).

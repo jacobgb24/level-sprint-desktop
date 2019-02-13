@@ -50,14 +50,3 @@ class LevelShelf extends Component {
 }
 
 export default LevelShelf;
-
-/*   <List>
-    <ListItem className="level-list-item">
-      <p>World 1-1</p>
-      <ListItemMeta
-        className="list-delete"
-        meta={<IconButton onClick={(e) => console.log(e)}>
-                <MaterialIcon icon="delete_outline"/>
-              </IconButton>}/>
-    </ListItem>
-  </List> */

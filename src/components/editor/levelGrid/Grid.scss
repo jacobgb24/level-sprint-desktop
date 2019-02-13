@@ -16,6 +16,10 @@
   border: 1px solid #000A0ABB;
 }
 
+.grid-container {
+
+}
+
 .editor-row {
   //width: 600px;
   //white-space: normal;
@@ -32,6 +36,7 @@
   overflow-x: auto;
   overflow-y: auto;
   white-space: nowrap;
+  max-height: 60vh;
 }
 
 .grid-scroll-layer::-webkit-scrollbar {

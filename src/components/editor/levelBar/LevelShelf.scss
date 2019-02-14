@@ -22,3 +22,7 @@
   @include mdc-fab-container-color($mdc-theme-secondary);
   @include mdc-fab-ink-color($mdc-theme-on-primary);
 }
+
+.mdc-text-field--disabled {
+  background-color: transparent;
+}

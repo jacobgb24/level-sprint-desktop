@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import update from 'immutability-helper';
 
 import {Level, DefaultLevel} from './levelGrid/Level.js'
 import LevelShelf from './levelBar/LevelShelf.js'
@@ -18,13 +19,28 @@ class Editor extends Component {
     activeObject: 0,
     objects: [ground, hill, hazard, spawn, goal, npc, blank],
     curLevel: new DefaultLevel(),
-    levels: []
+    curLevelInd: 0,
+    levels: [],
   };
+
+  componentDidMount() {
+    this.addLevel(null, this.state.curLevel);
+
+  }
+
+
 
   render() {
     return (
       <div className="editor-container">
-          <LevelShelf className="editor-shelf" />
+          <LevelShelf className="editor-shelf"
+            levels={this.state.levels}
+            addLevel={this.addLevel.bind(this)}
+            removeLevel={this.removeLevel.bind(this)}
+            selected={this.state.curLevelInd}
+            changeLevel={this.changeLevel.bind(this)}
+            updateName={this.updateLevelName.bind(this)}
+            />
           <Grid
             className="editor-grid"
             level={this.state.curLevel}
@@ -50,6 +66,35 @@ class Editor extends Component {
             />
       </div>
     );
+  }
+
+  addLevel(e, level = new Level()) {
+    var newLevels = [...this.state.levels];
+    newLevels.push(level);
+    // console.log(level);
+    this.setState({levels: newLevels});
+    // console.log("ADDING LEVEL. STATE IS", this.state.levels);
+    // this.changeLevel(this.state.levels - 1);
+  }
+
+  removeLevel(index) {
+    console.log("REMOVING", index);
+    this.setState({
+      levels: update(this.state.levels, {$splice: [[index, 1]]})
+    })
+  }
+
+  updateLevelName(index, newName) {
+    console.log(index, newName);
+    this.setState({
+      levels: update(this.state.levels, {[index]: {name: {$set: newName}}})
+    })
+  }
+
+  changeLevel(index) {
+    console.log("CHANGING LEVEL TO ", index)
+    this.setState({curLevelInd: index});
+    this.setState({curLevel: this.state.levels[index]});
   }
 
   placeObject = (x, y) => {

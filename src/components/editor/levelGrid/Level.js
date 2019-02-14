@@ -94,6 +94,7 @@ class DefaultLevel extends Level {
   constructor() {
     super();
     this.build_default();
+    this.name = "default";
   }
 
   build_default() {

@@ -12,12 +12,25 @@ https://github.com/material-components/material-components-web-react/tree/master
 */
 
 class LevelShelf extends Component {
-  state = {
-    selectedIndex: 1,
-  };
-
-
   render() {
+    console.log("SELECTED: ", this.props.selected)
+    let listItems = [];
+    for (let i = 0; i < this.props.levels.length; i++) {
+      listItems.push(
+        <ListItem className="level-list-item">
+          <TextField
+            key={i}
+            fullWidth
+            onTrailingIconSelect={(e) => this.props.removeLevel(i)}
+            trailingIcon={<MaterialIcon icon="delete_outline"/>}>
+            <Input className="level-list-input"
+              value={this.props.levels[i].name}
+              disabled={i != this.props.selected}
+              onChange={(e) => this.props.updateName(i, e.target.value)}/>
+            </TextField>
+        </ListItem>
+      );
+    }
     return (
       <div className="editor-shelf">
         <div className="shelfset-header levelbar-header">
@@ -31,22 +44,29 @@ class LevelShelf extends Component {
           <List
             className="level-list"
             singleSelection
-            selectedIndex={this.state.selectedIndex}
-            handleSelect={(selectedIndex) => this.setState({selectedIndex})}>
-            <ListItem className="level-list-item">
-              <TextField
-                fullWidth
-                onTrailingIconSelect={(e) => console.log(e)}
-                trailingIcon={<MaterialIcon icon="delete_outline"/>}>
-                <Input
-                  value='World 1-1' />
-                </TextField>
-            </ListItem>
+            selectedIndex={this.props.selected}
+            handleSelect={(selectedIndex) => this.props.changeLevel(selectedIndex)}>
+            {listItems}
           </List>
-          <Fab className="level-list-add" mini icon={<MaterialIcon icon="add"/>}/>
+          <Fab className="level-list-add"
+            mini icon={<MaterialIcon icon="add"/>}
+            onClick={this.props.addLevel}/>
       </div>
     );
   }
 }
+
+/*
+<ListItem className="level-list-item">
+  <TextField
+    fullWidth
+    onTrailingIconSelect={(e) => console.log(e)}
+    trailingIcon={<MaterialIcon icon="delete_outline"/>}>
+    <Input
+      value='World 1-1' />
+    </TextField>
+</ListItem>
+*/
+
 
 export default LevelShelf;

@@ -25,7 +25,7 @@ class Editor extends Component {
 
   componentDidMount() {
     this.addLevel(null, this.state.curLevel);
-
+    //TODO: put focus on this one. For some reason that doesn't happen
   }
 
 
@@ -69,12 +69,11 @@ class Editor extends Component {
   }
 
   addLevel(e, level = new Level()) {
-    var newLevels = [...this.state.levels];
-    newLevels.push(level);
-    // console.log(level);
-    this.setState({levels: newLevels});
-    // console.log("ADDING LEVEL. STATE IS", this.state.levels);
-    // this.changeLevel(this.state.levels - 1);
+    this.setState({
+      levels: update(this.state.levels, {$push: [level]})
+    })
+    // this.changeLevel(this.state.levels.length - 1);
+    //TODO: change focus to newest level. Above line crashes
   }
 
   removeLevel(index) {
@@ -82,6 +81,7 @@ class Editor extends Component {
     this.setState({
       levels: update(this.state.levels, {$splice: [[index, 1]]})
     })
+    //TODO: change focus on removal
   }
 
   updateLevelName(index, newName) {

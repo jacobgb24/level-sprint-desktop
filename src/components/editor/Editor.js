@@ -4,7 +4,9 @@ import update from 'immutability-helper';
 import {Level, DefaultLevel} from './levelGrid/Level.js'
 import LevelShelf from './levelBar/LevelShelf.js'
 import Grid from './levelGrid/Grid.js';
-import Shelf from './toolbar/Shelf.js';
+//import Shelf from './toolbar/Shelf.js';
+import ToolBar from './toolbar/ToolBar.js';
+import LevelResizer from './toolbar/LevelResizer.js';
 import './Editor.scss'
 
 import {ground, hill, hazard, spawn, goal, npc, blank} from 'images';
@@ -47,23 +49,27 @@ class Editor extends Component {
             click={this.placeObject}
           />
 
-          <Shelf
-              className="editor-shelf"
-              activeObject={this.state.activeObject}
+          <div>
+            <ToolBar
               activeTool={this.state.activeTool}
-              addColumn={this.addColumn}
-              removeColumn={this.removeColumn}
-              addRow={this.addRow}
-              removeRow={this.removeRow}
-              cols={this.state.curLevel.length}
-              rows={this.state.curLevel.height}
-              canAddCols={this.state.curLevel.canAddCol}
-              canAddRows={this.state.curLevel.canAddRow}
-              canRemoveCols={this.state.curLevel.canRemoveCol}
-              canRemoveRows={this.state.curLevel.canRemoveRow}
               changeTool={this.changeTool}
+              activeObject={this.state.activeObject}
               changeObject={this.changeObject}
             />
+            <LevelResizer
+              cols={this.state.curLevel.length}
+              addColumn={this.addColumn}
+              removeColumn={this.removeColumn}
+              canAddCols={this.state.curLevel.canAddCol}
+              canRemoveCols={this.state.curLevel.canRemoveCol}
+
+              rows={this.state.curLevel.height}
+              addRow={this.addRow}
+              removeColumn={this.removeColumn}
+              canAddRows={this.state.curLevel.canAddRow}
+              canRemoveCols={this.state.curLevel.canRemoveRow}
+            />
+          </div>
       </div>
     );
   }

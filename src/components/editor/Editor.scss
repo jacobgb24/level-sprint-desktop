@@ -26,14 +26,13 @@
 
 .editor-grid {
   flex-grow: 8;
-  
+
 }
 
 .editor-shelf {
   flex-grow: 2;
   margin: 0px;
-  min-width: 160px;
-  width: 160px;
+  min-width: 220px;
   max-width: 200px;
   background-color: $mdc-theme-surface;
   border-color: $mdc-theme-primary;

@@ -1,0 +1,70 @@
+@import 'colors.scss';
+@import "@material/typography/mdc-typography";
+@import '@material/react-icon-button/index.scss';
+
+.tools-shelf {
+
+}
+
+.level-objects-shelf {
+
+}
+
+.shelf {
+  padding: 8px;
+}
+
+.shelf-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0px;
+  margin-bottom: 12px;
+}
+
+.shelf-title {
+  font-family: "Roboto";
+  font-size: 18px;
+  margin: 0px;
+}
+
+.shelf-help {
+  @include mdc-icon-button-size(24px, 24px, 4px);
+  margin-left: auto;
+}
+
+.shelf-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shelf-item {
+  margin: 2px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.shelf-item:hover {
+  cursor: pointer;
+}
+
+.active-shelf-item {
+  box-shadow: 0px 0px 0px 2px $mdc-theme-secondary;
+}
+
+.inactive-shelf-item {
+
+}
+
+.shelf-item-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.shelf-item-label {
+  color: $black;
+  font-family: "Roboto";
+  font-weight: 300;
+  font-size: 14px;
+  margin: auto;
+}

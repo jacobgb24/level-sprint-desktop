@@ -5,18 +5,15 @@
 @import '@material/image-list/mdc-image-list';
 @import '@material/react-ripple/index.scss';
 
-.ripple-component {
-  @include mdc-ripple-surface;
-  @include mdc-ripple-radius-bounded;
-  @include mdc-states;
-}
 
 .shelfset {
   padding: 8px;
 }
 
 .shelfset-list {
-  @include mdc-image-list-standard-columns(3);
+  // @include mdc-image-list-standard-columns(3);
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .shelf-item-label {
@@ -58,11 +55,15 @@
 
 
 .shelf-item {
+  margin: 2px;
+  width: calc(100% / 3 - 4px);
   border-radius: 6px;
+  text-align: center;
 }
 
 .active-shelf-item {
-  border: 2px solid $mdc-theme-secondary;
+  // border: 2px solid $mdc-theme-secondary;
+  box-shadow: 0px 0px 0px 2px $mdc-theme-secondary;
 }
 
 h4 {

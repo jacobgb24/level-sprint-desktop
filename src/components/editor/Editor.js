@@ -65,9 +65,9 @@ class Editor extends Component {
 
               rows={this.state.curLevel.height}
               addRow={this.addRow}
-              removeColumn={this.removeColumn}
+              removeRow={this.removeRow}
               canAddRows={this.state.curLevel.canAddRow}
-              canRemoveCols={this.state.curLevel.canRemoveRow}
+              canRemoveRows={this.state.curLevel.canRemoveRow}
             />
           </div>
       </div>

@@ -17,9 +17,16 @@
 }
 
 .grid-container {
-
+  // margin-right: 24px;
+  margin: 0px;
+  padding: 4px 4px 4px 4px;
+  background-color: $mdc-theme-primary;
+  border-radius: 8px;
+  box-shadow: 0px 1px 1px #00000088;
+  flex-basis: 8;
+  flex-shrink: 6;
+  max-width: calc(100% - 500px);
 }
-
 .editor-row {
   //width: 600px;
   //white-space: normal;
@@ -29,6 +36,7 @@
   display: inline-block;
   border-color: $mdc-theme-primary;
   border-width: medium;
+  max-height: calc(100% - 130px);
 }
 
 
@@ -36,7 +44,6 @@
   overflow-x: auto;
   overflow-y: auto;
   white-space: nowrap;
-  max-height: 85%;
 }
 
 .grid-scroll-layer::-webkit-scrollbar {

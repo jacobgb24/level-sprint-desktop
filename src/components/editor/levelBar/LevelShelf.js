@@ -35,10 +35,10 @@ class LevelShelf extends Component {
     }
     return (
       <div className="editor-shelf">
-        <div className="shelfset-header levelbar-header">
-            <h2 className="shelfset-name">Levels</h2>
+        <div className="shelf-header levelbar-header">
+            <h2 className="shelf-title">Levels</h2>
             <IconButton onClick={this.props.helpFunc}
-              className="shelfset-help">
+              className="shelf-help">
               <MaterialIcon icon="help_outline"/>
             </IconButton>
           </div>

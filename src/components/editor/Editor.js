@@ -31,8 +31,6 @@ class Editor extends Component {
     })
   }
 
-
-
   render() {
     return (
       <div className="editor-container">
@@ -53,13 +51,14 @@ class Editor extends Component {
             click={this.placeObject}
           />
 
-          <div>
+          <div className='right-hand-sidebar'>
             <ToolBar
               activeTool={this.state.activeTool}
               changeTool={this.changeTool}
               activeObject={this.state.activeObject}
               changeObject={this.changeObject}
             />
+            <div style={{height: `8px`}}/>
             <LevelResizer
               cols={this.state.curLevel.length}
               addColumn={this.addColumn}
@@ -107,7 +106,13 @@ class Editor extends Component {
   }
 
   placeObject = (x, y) => {
-    let obj = this.state.objects[this.state.activeObject]
+    let deleteTool = 2;
+    let obj = null;
+    if (this.state.activeTool === deleteTool) {
+      obj = blank;
+    } else {
+      obj = this.state.objects[this.state.activeObject]
+    }
     this.state.curLevel.set(x, y, obj);
     this.setState(prev => ({curLevel: prev.curLevel}));
   }
@@ -119,9 +124,6 @@ class Editor extends Component {
 
   changeTool = (index) => {
     this.setState(prev => ({activeTool: index}))
-    if (index != 0) {
-      this.setState(prev => ({activeObject: 6}))
-    }
   }
 
   addColumn = () => {

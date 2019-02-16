@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'Share Tech Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Share Tech Mono'), local('ShareTechMono-Regular'), url(https://fonts.gstatic.com/l/font?kit=J7aHnp1uDWRBEqV98dVQztYldFc7oRMKZZ-qE22kPM9Q9Q&skey=241741910c57ea83&v=v8) format('woff2');
+}

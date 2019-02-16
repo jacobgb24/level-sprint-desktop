@@ -6,6 +6,7 @@ import HelpDialog from '../helpDialogs/Dialog.js';
 import DimHelp from '../helpDialogs/DimHelp.js'
 
 import './Shelf.scss'
+import './LevelResizer.scss'
 
 
 /*
@@ -35,11 +36,11 @@ class LevelResizer extends Component {
 
     divs.push(
       <div className="LevelResizer">
-        <div className="shelfset">
-          <div className="shelfset-header">
-            <h2 className="shelfset-name">Level Dimensions</h2>
+        <div className="shelf">
+          <div className="shelf-header">
+            <h2 className="shelf-title">Level Dimensions</h2>
               <IconButton onClick={this.toggleDimsDialog}
-                className="shelfset-help">
+                className="shelf-help">
                 <MaterialIcon icon="help_outline"/>
               </IconButton>
           </div>

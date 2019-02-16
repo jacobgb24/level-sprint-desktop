@@ -12,8 +12,6 @@
 }
 
 .grid-container {
-  // margin-right: 24px;
-  max-width: 60vw;
   margin: 0px;
   padding: 4px 4px 4px 4px;
   background-color: $mdc-theme-primary;
@@ -48,26 +46,15 @@ hr {
   margin: 0px;
 }
 
-
-.shelf-bg {
-
-}
-
-.shelfset-name {
-  font-family: 'Roboto';
-  font-size: 18px;
-  margin: 0px;
-}
-
-.shelfset-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 0px;
-  margin-bottom: 16px;
-}
-
-.shelfset-help {
+.shelf-help { // Doesn't work in any other file for some reason...
   margin-left: auto;
   @include mdc-icon-button-size(24px, 24px, 4px)
+}
+
+.dimension-button {
+  @include mdc-icon-button-size(24px, 24px, 0px);
+}
+
+.right-hand-sidebar {
+  max-height: 85%;
 }

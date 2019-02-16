@@ -19,8 +19,10 @@ class LevelShelf extends Component {
       listItems.push(
         <ListItem className="level-list-item">
           <TextField
+            className="level-list-field"
             key={i}
             fullWidth
+            filled
             onTrailingIconSelect={(e) => this.props.removeLevel(i)}
             trailingIcon={<MaterialIcon icon="delete_outline"/>}>
             <Input className="level-list-input"
@@ -49,7 +51,9 @@ class LevelShelf extends Component {
             {listItems}
           </List>
           <Fab className="level-list-add"
-            mini icon={<MaterialIcon icon="add"/>}
+            mini
+            // icon={<MaterialIcon icon="add"/>}
+            textLabel="New Level"
             onClick={this.props.addLevel}/>
       </div>
     );

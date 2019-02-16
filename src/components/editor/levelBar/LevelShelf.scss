@@ -16,6 +16,12 @@
   padding-right: 0px;
 }
 
+.level-list-field {
+  @include mdc-text-field-caret-color($mdc-theme-secondary);
+  @include mdc-text-field-bottom-line-color($mdc-theme-secondary);
+
+}
+
 .level-list-add {
   float: right;
   margin: 8px;

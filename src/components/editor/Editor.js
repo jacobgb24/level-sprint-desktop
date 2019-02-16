@@ -21,13 +21,14 @@ class Editor extends Component {
     activeObject: 0,
     objects: [ground, hill, hazard, spawn, goal, npc, blank],
     curLevel: new DefaultLevel(),
-    curLevelInd: 0,
     levels: [],
   };
 
-  componentDidMount() {
-    this.addLevel(null, this.state.curLevel);
-    //TODO: put focus on this one. For some reason that doesn't happen
+  // Called before render. Adjust the state to include the default level
+  componentWillMount() {
+    this.setState({
+      levels: update(this.state.levels, {$push: [this.state.curLevel]})
+    })
   }
 
 
@@ -39,7 +40,10 @@ class Editor extends Component {
             levels={this.state.levels}
             addLevel={this.addLevel.bind(this)}
             removeLevel={this.removeLevel.bind(this)}
-            selected={this.state.curLevelInd}
+            /*We only compare the level data because otherwise changing the name
+              loses focus*/
+            selected={this.state.levels.map(function(level) { return level.data})
+                      .indexOf(this.state.curLevel.data)}
             changeLevel={this.changeLevel.bind(this)}
             updateName={this.updateLevelName.bind(this)}
             />
@@ -76,18 +80,18 @@ class Editor extends Component {
 
   addLevel(e, level = new Level()) {
     this.setState({
-      levels: update(this.state.levels, {$push: [level]})
-    })
-    // this.changeLevel(this.state.levels.length - 1);
-    //TODO: change focus to newest level. Above line crashes
+      levels: update(this.state.levels, {$push: [level]}),
+    }, () => {this.changeLevel(this.state.levels.length - 1)})
+
   }
 
   removeLevel(index) {
-    console.log("REMOVING", index);
-    this.setState({
-      levels: update(this.state.levels, {$splice: [[index, 1]]})
-    })
-    //TODO: change focus on removal
+    if (this.state.levels.length > 1) {
+      this.setState({
+        levels: update(this.state.levels, {$splice: [[index, 1]]})
+      }, () => { this.changeLevel(Math.max(0, index - 1))})
+    }
+    //TODO: Alert Dialog to confirm before deleting
   }
 
   updateLevelName(index, newName) {
@@ -98,8 +102,7 @@ class Editor extends Component {
   }
 
   changeLevel(index) {
-    console.log("CHANGING LEVEL TO ", index)
-    this.setState({curLevelInd: index});
+    // console.log("CHANGING LEVEL TO ", index)
     this.setState({curLevel: this.state.levels[index]});
   }
 

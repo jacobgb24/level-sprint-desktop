@@ -90,6 +90,11 @@ class Editor extends Component {
         levels: update(this.state.levels, {$splice: [[index, 1]]})
       }, () => { this.changeLevel(Math.max(0, index - 1))})
     }
+    else {
+      this.setState({
+        levels: update(this.state.levels, {[0]: {$set: new DefaultLevel()}})
+      }, () => { this.changeLevel(0)})
+    }
     //TODO: Alert Dialog to confirm before deleting
   }
 

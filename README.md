@@ -5,6 +5,7 @@
 - [Sass](https://sass-lang.com/guide)
 - [MDC Themes](https://github.com/material-components/material-components-web/tree/master/packages/mdc-theme)
 - [MDC Components](https://github.com/material-components/material-components-web-react)
+- [HotKeys](https://github.com/greena13/react-hotkeys)
 
 ### Building
 - You need to add sass to your path. Do so via `SASS_PATH=./node_modules`.

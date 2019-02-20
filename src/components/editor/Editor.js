@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import update from 'immutability-helper';
-
+import {GlobalHotKeys} from 'react-hotkeys';
 import {Level, DefaultLevel} from './levelGrid/Level.js'
 import LevelShelf from './levelBar/LevelShelf.js'
 import Grid from './levelGrid/Grid.js';
@@ -24,6 +24,18 @@ class Editor extends Component {
     objects: [ground, hill, hazard, spawn, goal, npc, blank],
     curLevel: new DefaultLevel(),
     levels: [],
+    // handle keys for tool layer up here since no lower dependencies
+    // keyMap {name: keys,...}. keyHandlers {name: function,...}
+    keyMap: {
+        'place': 'q',
+        'move': 'w',
+        'delete': 'e',
+    },
+    keyHandlers: {
+       'place': (event) => this.changeTool({index: 0}),
+       'move': (event) => this.changeTool({index: 1}),
+       'delete': (event) => this.changeTool({index: 2}),
+   },
   };
 
   // Called before render. Adjust the state to include the default level
@@ -34,8 +46,10 @@ class Editor extends Component {
   }
 
   render() {
+    console.log(this.state.keyMap)
     return (
       <div className="editor-container">
+          <GlobalHotKeys keyMap={this.state.keyMap} handlers={this.state.keyHandlers}/>
           <LevelShelf className="editor-shelf"
             levels={this.state.levels}
             addLevel={this.addLevel.bind(this)}
@@ -129,7 +143,7 @@ class Editor extends Component {
   changeObject = ({index, rotation=0, flip=1} = {}) => {
     console.log(index, rotation, flip)
     this.setState({activeObject: index, activeObjectRotation: rotation, activeObjectFlip: flip})
-    // this.changeTool(0);
+    this.changeTool({index: 0});
   }
 
   changeTool = (index) => {
@@ -157,7 +171,10 @@ class Editor extends Component {
     this.state.curLevel.removeRow();
     this.setState(prev => ({curLevel: prev.curLevel}));
   };
+
 }
+
+
 
 
 export default Editor;

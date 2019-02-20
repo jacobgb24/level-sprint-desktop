@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import IconButton from '@material/react-icon-button';
 import MaterialIcon from '@material/react-material-icon';
 import update from 'immutability-helper';
+import {GlobalHotKeys} from 'react-hotkeys';
 
 import HelpDialog from '../helpDialogs/Dialog.js';
 import ObjectHelp from '../helpDialogs/ObjectHelp.js';
@@ -23,21 +24,48 @@ class ToolBar extends Component {
       {name:'Goal', inactive:image.goal_line, active:image.goal_fill, rotates:false, flips:true, flipped:1},
       {name:'NPC', inactive:image.npc_line, active:image.npc_fill, rotates:false, flips:false}
     ],
+    // handle these at this layer since it knows rotation
+    // keyMap {name: keys,...}. keyHandlers {name: function,...}
+    keyMap: {
+      'ground': '1',
+      'hill': '2',
+      'hazard': '3',
+      'spawn': '4',
+      'goal': '5',
+      'npc': '6',
+      'rotate': 'r',
+      'rotateCCW': 'shift+r',
+      'flip': 'f',
+    },
+    keyHandlers: {
+       'ground': (event) => this.props.changeObject({index: 0}),
+       'hill': (event) => this.props.changeObject({index: 1, rotation: this.state.objects[1].rotation}),
+       'hazard': (event) => this.props.changeObject({index: 2, rotation: this.state.objects[2].rotation}),
+       'spawn': (event) => this.props.changeObject({index: 3, flip: this.state.objects[3].flipped}),
+       'goal': (event) => this.props.changeObject({index: 4, flip: this.state.objects[4].flipped}),
+       'npc': (event) => this.props.changeObject({index: 5}),
+       'rotate': (event) => this.rotateObject(this.props.activeObject, this.props.changeObject),
+       'rotateCCW': (event) => this.rotateObject(this.props.activeObject, this.props.changeObject, true),
+       'flip': (event) => this.flipObject(this.props.activeObject, this.props.changeObject)
+   },
   }
 
   // For these two we pass `changeShelfItem` because it needs to be called after the rotation
   // is applied. Otherwise the actual state lags behind visually
-  rotateObject = (index, changeShelfItem) => {
-    this.setState({
-      objects: update(this.state.objects, {[index]: {rotation: {$apply: function(r) {return (r+90)%360}}}})
-    }, () => {changeShelfItem({index: index, rotation: this.state.objects[index].rotation})});
-
+  rotateObject = (index, changeShelfItem, reverse=false) => {
+    if (this.state.objects[index].rotates) {
+      this.setState({
+        objects: update(this.state.objects, {[index]: {rotation: {$apply: function(r) {return (!reverse ? r+90 : r-90)%360}}}})
+      }, () => {changeShelfItem({index: index, rotation: this.state.objects[index].rotation})});
+    }
   }
 
   flipObject = (index, changeShelfItem) => {
-    this.setState({
-      objects: update(this.state.objects, {[index]: {flipped: {$apply: function(f) {return -f}}}})
-    }, () => {changeShelfItem({index: index, flip: this.state.objects[index].flipped})});
+    if (this.state.objects[index].flips) {
+      this.setState({
+        objects: update(this.state.objects, {[index]: {flipped: {$apply: function(f) {return -f}}}})
+      }, () => {changeShelfItem({index: index, flip: this.state.objects[index].flipped})});
+    }
   }
 
   render() {
@@ -67,7 +95,12 @@ class ToolBar extends Component {
         );
     }
 
-    return <div className="editor-shelf"> {divs} </div>
+    return(
+      <div className="editor-shelf">
+        <GlobalHotKeys keyMap={this.state.keyMap} handlers={this.state.keyHandlers}/>
+        {divs}
+      </div>
+    )
   }
 
 }

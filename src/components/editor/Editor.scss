@@ -58,3 +58,8 @@ hr {
 .right-hand-sidebar {
   max-height: 85%;
 }
+
+// hide outline caused by hotkeys
+div[tabindex="-1"]:focus {
+    outline: 0;
+}

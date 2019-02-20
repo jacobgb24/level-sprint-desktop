@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
+import {IgnoreKeys} from 'react-hotkeys';
+
 import IconButton from '@material/react-icon-button';
 import MaterialIcon from '@material/react-material-icon';
 import List, {ListItem, ListItemGraphic, ListItemText, ListItemMeta} from '@material/react-list';
 import TextField, {HelperText, Input} from '@material/react-text-field';
 import Fab from '@material/react-fab';
+
 import './LevelShelf.scss'
 import DeleteConfirm from './DeleteConfirm.js'
 import LevelHelp from '../helpDialogs/LevelHelp.js'
@@ -21,12 +24,12 @@ class LevelShelf extends Component {
   }
 
   setDeleteConf = (index) => {
-    console.log("SET CALLED", index)
+    // console.log("SET CALLED", index)
     this.setState({showDeleteConf: index});
   }
 
   deleteConfirmCallback(action) {
-    console.log("CALLBACK CALLED", action, this.state.showDeleteConf)
+    // console.log("CALLBACK CALLED", action, this.state.showDeleteConf)
     if (action == "delete") {
       this.props.removeLevel(this.state.showDeleteConf);
     }
@@ -42,21 +45,25 @@ class LevelShelf extends Component {
     let listItems = [];
     for (let i = 0; i < this.props.levels.length; i++) {
       listItems.push(
-        <ListItem
-          className="level-list-item"
-          key={i}>
-          <TextField
-            className="level-list-field"
-            fullWidth
-            filled
-            onTrailingIconSelect={(e) => this.setDeleteConf(i)}
-            trailingIcon={<MaterialIcon icon="delete_outline"/>}>
-            <Input className="level-list-input"
-              value={this.props.levels[i].name}
-              disabled={i != this.props.selected}
-              onChange={(e) => this.props.updateName(i, e.target.value)}/>
-            </TextField>
-        </ListItem>
+        <IgnoreKeys>
+          <ListItem
+            className="level-list-item"
+            key={i}>
+
+            <TextField
+              className="level-list-field"
+              fullWidth
+              filled
+              onTrailingIconSelect={(e) => this.setDeleteConf(i)}
+              trailingIcon={<MaterialIcon icon="delete_outline"/>}>
+              <Input className="level-list-input"
+                value={this.props.levels[i].name}
+                disabled={i != this.props.selected}
+                onChange={(e) => this.props.updateName(i, e.target.value)}/>
+              </TextField>
+          </ListItem>
+        </IgnoreKeys>
+
       );
     }
     // console.log(this.state.showDeleteConf)

@@ -5,7 +5,8 @@ import Dialog, {
   DialogButton,
   DialogTitle,
 } from '@material/react-dialog';
- import '../helpDialogs/Dialog.scss'
+import '../helpDialogs/Dialog.scss'
+
 class DeleteConfirm extends Component {
   state = {isOpen: true, action: ''};
 

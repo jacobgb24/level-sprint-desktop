@@ -79,13 +79,24 @@ class Tile extends Component {
   }
 
   render() {
-    // console.log(this.props.value)
+    // Figure out if we need a transform based on tuple
+    var transform = "none";
+    if (this.props.value.rotation) {
+      transform = `rotate(${this.props.value.rotation}deg)`
+      console.log(transform)
+
+    }
+    else if (this.props.value.flip) {
+      transform = `scaleX(${this.props.value.flip})`;
+    }
+
     return (
       <img
-        src={this.props.value}
+        src={this.props.value.obj}
         className="tile"
         onMouseDown={this.click}
         onMouseEnter={this.over}
+        style={{transform}}
       />
     )
   }

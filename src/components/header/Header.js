@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {logo} from 'images';
 import './Header.scss'
 import Button from '@material/react-button'

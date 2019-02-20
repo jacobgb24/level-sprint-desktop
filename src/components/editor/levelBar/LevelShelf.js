@@ -42,10 +42,11 @@ class LevelShelf extends Component {
     let listItems = [];
     for (let i = 0; i < this.props.levels.length; i++) {
       listItems.push(
-        <ListItem className="level-list-item">
+        <ListItem
+          className="level-list-item"
+          key={i}>
           <TextField
             className="level-list-field"
-            key={i}
             fullWidth
             filled
             onTrailingIconSelect={(e) => this.setDeleteConf(i)}

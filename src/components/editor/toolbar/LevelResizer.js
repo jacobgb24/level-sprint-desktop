@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import IconButton, {IconToggle} from '@material/react-icon-button';
+import IconButton from '@material/react-icon-button';
 import MaterialIcon from '@material/react-material-icon';
 
 import HelpDialog from '../helpDialogs/Dialog.js';

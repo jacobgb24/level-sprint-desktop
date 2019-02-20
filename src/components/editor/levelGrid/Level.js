@@ -19,7 +19,14 @@ class Level {
     this.canRemoveRow = false
   }
 
+  // value should be an object literal:
+  // {obj: imageStr, rotation: degrees, flip: bool}
+  // or just a string for compatibilty
   set(x, y, value) {
+    //handle old way of passing just string
+    if (typeof value == "string") {
+      value = {obj: value, rotation: 0, flip: 1}
+    }
     this.data.subset(math.index(y, x), value);
   }
 
@@ -82,7 +89,7 @@ class Level {
   }
 
   resize() {
-    this.data.resize([this.height, this.length], blank);
+    this.data.resize([this.height, this.length], {obj: blank, rotation: 0, flip: 1});
   }
 
   rename(name) {

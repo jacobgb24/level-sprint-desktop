@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import IconButton, {IconToggle} from '@material/react-icon-button';
+import IconButton from '@material/react-icon-button';
 import MaterialIcon from '@material/react-material-icon';
+import update from 'immutability-helper';
 
 import HelpDialog from '../helpDialogs/Dialog.js';
 import ObjectHelp from '../helpDialogs/ObjectHelp.js';
@@ -24,18 +25,19 @@ class ToolBar extends Component {
     ],
   }
 
-  rotateObject = index => {
-    this.setState(prev => {
-      prev.objects[index].rotation = (prev.objects[index].rotation +90)%360;
-      return {objects: prev.objects};
-    });
+  // For these two we pass `changeShelfItem` because it needs to be called after the rotation
+  // is applied. Otherwise the actual state lags behind visually
+  rotateObject = (index, changeShelfItem) => {
+    this.setState({
+      objects: update(this.state.objects, {[index]: {rotation: {$apply: function(r) {return (r+90)%360}}}})
+    }, () => {changeShelfItem({index: index, rotation: this.state.objects[index].rotation})});
+
   }
 
-  flipObject = index => {
-    this.setState(prev => {
-      prev.objects[index].flipped = -prev.objects[index].flipped;
-      return {objects: prev.objects};
-    });
+  flipObject = (index, changeShelfItem) => {
+    this.setState({
+      objects: update(this.state.objects, {[index]: {flipped: {$apply: function(f) {return -f}}}})
+    }, () => {changeShelfItem({index: index, flip: this.state.objects[index].flipped})});
   }
 
   render() {
@@ -81,6 +83,7 @@ class ToolShelf extends Component {
   }
 
   render() {
+    console.log("ACTIVE: ", this.props.active)
     let items = []
     for (let i = 0; i < this.state.tools.length; i++) {
       let tool = this.state.tools[i];
@@ -210,7 +213,7 @@ class ObjectShelf extends Component {
 class ShelfItem extends Component {
 
   click = () => {
-    this.props.changeShelfItem(this.props.index);
+    this.props.changeShelfItem({index: this.props.index});
   }
 
   render() {
@@ -236,16 +239,16 @@ class RotatableShelfItem extends Component {
 
     click = () => {
       if (this.props.active) {
-        this.props.rotate(this.props.index)
+        this.props.rotate(this.props.index, this.props.changeShelfItem)
       } else {
-        this.props.changeShelfItem(this.props.index);
+        this.props.changeShelfItem({index: this.props.index, rotation: this.props.item.rotation});
       }
     }
 
     render() {
       var icon = this.props.active ? this.props.item.active : this.props.item.inactive;
       var cl = this.props.active ? 'active-shelf-item' : 'inactive-shelf-item';
-      
+
       return (
         <div className={"shelf-item mdc-ripple-surface mdc-image-list__item " + cl} onClick={this.click}>
           <img
@@ -267,9 +270,9 @@ class FlippableShelfItem extends Component {
 
     click = () => {
       if (this.props.active) {
-        this.props.flip(this.props.index)
+        this.props.flip(this.props.index, this.props.changeShelfItem)
       } else {
-        this.props.changeShelfItem(this.props.index);
+        this.props.changeShelfItem({index: this.props.index, flip: this.props.item.flipped});
       }
     }
 

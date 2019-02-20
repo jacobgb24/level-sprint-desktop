@@ -19,6 +19,8 @@ class Editor extends Component {
   state = {
     activeTool: 0,
     activeObject: 0,
+    activeObjectRotation: 0,
+    activeObjectFlip: 0,
     objects: [ground, hill, hazard, spawn, goal, npc, blank],
     curLevel: new DefaultLevel(),
     levels: [],
@@ -112,23 +114,28 @@ class Editor extends Component {
 
   placeObject = (x, y) => {
     let deleteTool = 2;
-    let obj = null;
+    let value = null;
     if (this.state.activeTool === deleteTool) {
-      obj = blank;
+      value = {obj:blank, rotation: 0, flip: 1};
     } else {
-      obj = this.state.objects[this.state.activeObject]
+      value = {obj: this.state.objects[this.state.activeObject],
+                rotation: this.state.activeObjectRotation,
+                flip: this.state.activeObjectFlip}
     }
-    this.state.curLevel.set(x, y, obj);
+    this.state.curLevel.set(x, y, value);
     this.setState(prev => ({curLevel: prev.curLevel}));
   }
 
-  changeObject = (index) => {
-    this.setState(prev => ({activeObject: index}))
-    this.changeTool(0);
+  changeObject = ({index, rotation=0, flip=1} = {}) => {
+    console.log(index, rotation, flip)
+    this.setState({activeObject: index, activeObjectRotation: rotation, activeObjectFlip: flip})
+    // this.changeTool(0);
   }
 
   changeTool = (index) => {
-    this.setState(prev => ({activeTool: index}))
+    // for some reason the index is wrapped in an object
+    console.log("Changed tool:", index)
+    this.setState({activeTool: index.index});
   }
 
   addColumn = () => {

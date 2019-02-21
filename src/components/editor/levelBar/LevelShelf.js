@@ -29,11 +29,10 @@ class LevelShelf extends Component {
   }
 
   deleteConfirmCallback(action) {
-    // console.log("CALLBACK CALLED", action, this.state.showDeleteConf)
-    if (action == "delete") {
-      this.props.removeLevel(this.state.showDeleteConf);
-    }
-    this.setState({showDeleteConf: -1});
+    // save index to delete then change it first to prevent the confirmation
+    // from showing again
+    let index = this.state.showDeleteConf
+    this.setState({showDeleteConf: -1}, () => action == "delete" ? this.props.removeLevel(index) : null);
   }
 
   toggleLevelsDialog = () => {
@@ -92,7 +91,7 @@ class LevelShelf extends Component {
         <List
           className="level-list"
           singleSelection
-          selectedIndex={this.props.selected}
+          selectedIndex={Math.max(0, this.props.selected)}
           handleSelect={(selectedIndex) => this.props.changeLevel(selectedIndex)}>
           {listItems}
         </List>

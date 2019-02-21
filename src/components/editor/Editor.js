@@ -127,6 +127,7 @@ class Editor extends Component {
   }
 
   removeLevel(index) {
+    console.log("DEL", index)
     if (this.state.levels.length > 1) {
       this.setState({
         levels: update(this.state.levels, {$splice: [[index, 1]]})
@@ -134,14 +135,13 @@ class Editor extends Component {
     }
     else {
       this.setState({
-        levels: update(this.state.levels, {[0]: {$set: new DefaultLevel()}})
+        levels: update(this.state.levels, {[0]: {$set: new Level()}})
       }, () => { this.changeLevel(0)})
     }
-    //TODO: Alert Dialog to confirm before deleting
   }
 
   updateLevelName(index, newName) {
-    console.log(index, newName);
+    console.log("NEW NAME", index, newName);
     this.setState({
       levels: update(this.state.levels, {[index]: {name: {$set: newName}}})
     })
@@ -171,14 +171,14 @@ class Editor extends Component {
   }
 
   changeObject = ({index, rotation=0, flip=1} = {}) => {
-    console.log(index, rotation, flip)
+    // console.log(index, rotation, flip)
     this.setState({activeObject: index, activeObjectRotation: rotation, activeObjectFlip: flip})
     this.changeTool({index: 0});
   }
 
   changeTool = (index) => {
     // for some reason the index is wrapped in an object
-    console.log("Changed tool:", index)
+    // console.log("Changed tool:", index)
     this.setState({activeTool: index.index});
   }
 

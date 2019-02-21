@@ -81,26 +81,26 @@ class LevelShelf extends Component {
           : null
         }
         <div className="shelf-header levelbar-header">
-            <h2 className="shelf-title">Levels</h2>
-            <IconButton
-              onClick={this.toggleLevelsDialog}
-              className="shelf-help">
-              <MaterialIcon icon="help_outline"/>
-            </IconButton>
-          </div>
-          <hr></hr>
-          <List
-            className="level-list"
-            singleSelection
-            selectedIndex={this.props.selected}
-            handleSelect={(selectedIndex) => this.props.changeLevel(selectedIndex)}>
-            {listItems}
-          </List>
-          <Fab className="level-list-add"
-            mini
-            // icon={<MaterialIcon icon="add"/>}
-            textLabel="New Level"
-            onClick={this.props.addLevel}/>
+          <h2 className="shelf-title">Levels</h2>
+          <IconButton
+            onClick={this.toggleLevelsDialog}
+            className="shelf-help">
+            <MaterialIcon icon="help_outline"/>
+          </IconButton>
+        </div>
+        <hr></hr>
+        <List
+          className="level-list"
+          singleSelection
+          selectedIndex={this.props.selected}
+          handleSelect={(selectedIndex) => this.props.changeLevel(selectedIndex)}>
+          {listItems}
+        </List>
+        <Fab className="level-list-add"
+          mini
+          // icon={<MaterialIcon icon="add"/>}
+          textLabel="New Level"
+          onClick={this.props.addLevel}/>
       </div>
     );
   }

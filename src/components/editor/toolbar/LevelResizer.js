@@ -25,9 +25,9 @@ class LevelResizer extends Component {
     },
     keyHandlers: {
        'add-row': (event) => this.props.canAddRows ? this.props.addRow() : null,
-       'remove-row': (event) => this.props.canRemoveRows ? this.props.RemoveRow() : null,
+       'remove-row': (event) => this.props.canRemoveRows ? this.props.removeRow() : null,
        'add-col': (event) => this.props.canAddCols ? this.props.addColumn() : null,
-       'remove-row': (event) => this.props.canRemoveCols ? this.props.removeColumn() : null,
+       'remove-col': (event) => this.props.canRemoveCols ? this.props.removeColumn() : null,
 
    },
   }

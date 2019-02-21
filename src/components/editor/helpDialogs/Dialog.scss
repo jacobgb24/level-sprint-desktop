@@ -5,3 +5,35 @@
 .dialog {
   @include mdc-dialog-container-fill-color($mdc-theme-surface)
 }
+
+kbd {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.1em 0.5em;
+    margin: 0 0.2em;
+    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
+    background-color: #f7f7f7;
+    font-family: "courier new", courier, monospace;
+    font-size: 20px;
+}
+
+.shortcut-line {
+    margin-bottom: 0;
+    margin-top: 8px;
+}
+
+.row {
+  display: flex;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 50%;
+  padding: 8px;
+}
+
+h4 {
+    margin-bottom: 0px !important;
+    margin-top: 24px !important;
+}

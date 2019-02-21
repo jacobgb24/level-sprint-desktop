@@ -1,6 +1,8 @@
 @import 'colors.scss';
 @import "@material/typography/mdc-typography";
 @import '@material/react-icon-button/index.scss';
+@import "@material/react-button/index.scss";
+
 
 .editor-container {
   display: flex;
@@ -62,4 +64,9 @@ hr {
 // hide outline caused by hotkeys
 div[tabindex="-1"]:focus {
     outline: 0;
+}
+
+.hotkey-button {
+  width: 100%;
+  // @include mdc-button-ink-color($mdc-theme-on-primary);
 }

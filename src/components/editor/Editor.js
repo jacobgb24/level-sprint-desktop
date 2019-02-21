@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import update from 'immutability-helper';
 import {GlobalHotKeys} from 'react-hotkeys';
+
+import Button from '@material/react-button';
+
 import {Level, DefaultLevel} from './levelGrid/Level.js'
 import LevelShelf from './levelBar/LevelShelf.js'
 import Grid from './levelGrid/Grid.js';
@@ -8,6 +11,8 @@ import Grid from './levelGrid/Grid.js';
 import ToolBar from './toolbar/ToolBar.js';
 import LevelResizer from './toolbar/LevelResizer.js';
 import './Editor.scss'
+import HotKeysHelp from './helpDialogs/HotKeysHelp.js'
+import HelpDialog from './helpDialogs/Dialog.js'
 
 import {ground, hill, hazard, spawn, goal, npc, blank} from 'images';
 
@@ -24,6 +29,7 @@ class Editor extends Component {
     objects: [ground, hill, hazard, spawn, goal, npc, blank],
     curLevel: new DefaultLevel(),
     levels: [],
+    showHotKeysDialog: false,
     // handle keys for tool layer up here since no lower dependencies
     // keyMap {name: keys,...}. keyHandlers {name: function,...}
     keyMap: {
@@ -51,10 +57,19 @@ class Editor extends Component {
     })
   }
 
+  toggleHotKeysDialog = () => {
+    this.setState({showHotKeysDialog: !this.state.showHotKeysDialog});
+  }
+
   render() {
     // console.log(this.state.keyMap)
     return (
       <div className="editor-container">
+          {this.state.showHotKeysDialog ?
+            <HelpDialog onClose={this.toggleHotKeysDialog}
+              title="Keyboard Shortcuts" content={<HotKeysHelp/>}/>
+            : null
+          }
           <GlobalHotKeys keyMap={this.state.keyMap} handlers={this.state.keyHandlers}/>
           <LevelShelf className="editor-shelf"
             levels={this.state.levels}
@@ -91,6 +106,14 @@ class Editor extends Component {
               canAddRows={this.state.curLevel.canAddRow}
               canRemoveRows={this.state.curLevel.canRemoveRow}
             />
+          <div style={{height: `24px`}}/>
+
+            <Button
+              outlined
+              className="hotkey-button"
+              onClick={this.toggleHotKeysDialog}>
+              Keyboard Shortcuts
+            </Button>
           </div>
       </div>
     );

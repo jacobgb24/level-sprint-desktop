@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Dialog.scss'
 
-const DimHelp = props => {
+const HotKeysHelp = props => {
   return (
     <div>
       <h4>Tool Shortcuts</h4>
@@ -68,7 +68,7 @@ const kbdWrapper = (keys, desc, shift=false) => {
             <kbd><b>{keys}</b></kbd>- {desc}</p>)
 }
 
-export default DimHelp;
+export default HotKeysHelp;
 
 
 // const DimHelp = props => {

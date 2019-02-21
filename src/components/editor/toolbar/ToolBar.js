@@ -18,7 +18,7 @@ class ToolBar extends Component {
   state = {
     objects:[
       {name:'Ground', inactive: image.ground_line, active:image.ground_fill, rotates: false, flips: false},
-      {name:'Hill', inactive:image.hill_line, active:image.hill_fill, rotates:true, flips:false, rotation:0},
+      {name:'Hill', inactive:image.hill_line, active:image.hill_fill, rotates:true, flips:false, rotation:270},
       {name:'Hazard', inactive:image.hazard_line, active:image.hazard_fill, rotates:true, flips:false, rotation:0},
       {name:'Spawn', inactive:image.spawn_line, active:image.spawn_fill, rotates:false, flips:true, flipped:1},
       {name:'Goal', inactive:image.goal_line, active:image.goal_fill, rotates:false, flips:true, flipped:1},

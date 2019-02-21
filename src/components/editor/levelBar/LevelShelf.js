@@ -41,14 +41,14 @@ class LevelShelf extends Component {
   }
 
   render() {
-    // console.log("SELECTED: ", this.props.selected)
+    console.log("SELECTED: ", this.props.selected)
     let listItems = [];
     for (let i = 0; i < this.props.levels.length; i++) {
       listItems.push(
-        <IgnoreKeys>
           <ListItem
             className="level-list-item"
             key={i}>
+            <IgnoreKeys className="ignore-keys">
 
             <TextField
               className="level-list-field"
@@ -56,13 +56,14 @@ class LevelShelf extends Component {
               filled
               onTrailingIconSelect={(e) => this.setDeleteConf(i)}
               trailingIcon={<MaterialIcon icon="delete_outline"/>}>
-              <Input className="level-list-input"
-                value={this.props.levels[i].name}
-                disabled={i != this.props.selected}
-                onChange={(e) => this.props.updateName(i, e.target.value)}/>
-              </TextField>
+                <Input className="level-list-input"
+                  value={this.props.levels[i].name}
+                  disabled={i != this.props.selected}
+                  onChange={(e) => this.props.updateName(i, e.target.value)}/>
+            </TextField>
+          </IgnoreKeys>
+
           </ListItem>
-        </IgnoreKeys>
 
       );
     }

@@ -17,6 +17,7 @@
 }
 
 .level-list-field {
+  padding-left: 8px;
   @include mdc-text-field-caret-color($mdc-theme-secondary);
   @include mdc-text-field-bottom-line-color($mdc-theme-secondary);
 
@@ -31,4 +32,15 @@
 
 .mdc-text-field--disabled {
   background-color: transparent;
+}
+
+div[tabindex="-1"]:focus {
+    outline: 0;
+}
+
+.ignore-keys {
+  position: absolute;
+  right: 0;
+  left: 0;
+
 }

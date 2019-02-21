@@ -2,21 +2,24 @@ import * as math from 'mathjs'
 
 import {blank, ground, spawn} from 'images';
 
+var globalLevelID = 0;
+
 class Level {
   constructor() {
     this.height = 10;
     this.minHeight = 10;
     this.length = 16;
     this.minLength = 16;
-    this.name = "Unnamed Level";
     this.maxTiles = 1024
     this.data = math.matrix();
     this.resize()
-
+    this.id = globalLevelID++;
     this.canAddCol = true
     this.canAddRow = true
     this.canRemoveCol = false
     this.canRemoveRow = false
+    this.name = "Unnamed Level (" + this.id + ")";
+
   }
 
   // value should be an object literal:

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import IconButton from '@material/react-icon-button';
 import MaterialIcon from '@material/react-material-icon';
+import {GlobalHotKeys} from 'react-hotkeys';
 
 import HelpDialog from '../helpDialogs/Dialog.js';
 import DimHelp from '../helpDialogs/DimHelp.js'
@@ -15,7 +16,20 @@ import './LevelResizer.scss'
 */
 class LevelResizer extends Component {
   state = {
-    showDimsHelp: false
+    showDimsHelp: false,
+    keyMap: {
+        'add-row': 'up',
+        'remove-row': 'down',
+        'add-col': 'right',
+        'remove-col': 'left',
+    },
+    keyHandlers: {
+       'add-row': (event) => this.props.canAddRows ? this.props.addRow() : null,
+       'remove-row': (event) => this.props.canRemoveRows ? this.props.RemoveRow() : null,
+       'add-col': (event) => this.props.canAddCols ? this.props.addColumn() : null,
+       'remove-row': (event) => this.props.canRemoveCols ? this.props.removeColumn() : null,
+
+   },
   }
 
   toggleDimsDialog = () => {
@@ -65,7 +79,12 @@ class LevelResizer extends Component {
       </div>
     )
 
-    return <div className="editor-shelf"> {divs} </div>
+    return(
+      <div className="editor-shelf">
+        <GlobalHotKeys keyMap={this.state.keyMap} handlers={this.state.keyHandlers}/>
+        {divs}
+      </div>
+    )
   }
 
 }

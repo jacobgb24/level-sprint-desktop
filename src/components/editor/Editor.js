@@ -30,11 +30,17 @@ class Editor extends Component {
         'place': 'q',
         'move': 'w',
         'delete': 'e',
+        'next-level': '>',
+        'prev-level': '<',
+        'new-level': 'n',
     },
     keyHandlers: {
        'place': (event) => this.changeTool({index: 0}),
        'move': (event) => this.changeTool({index: 1}),
        'delete': (event) => this.changeTool({index: 2}),
+       'next-level': (event) => this.changeLevel((this.getCurrentLevelInd() + 1) % this.state.levels.length),
+       'prev-level': (event) => this.changeLevel(this.getCurrentLevelInd() != 0 ? (this.getCurrentLevelInd() - 1) : this.state.levels.length - 1),
+       'new-level': (event) => this.addLevel(null),
    },
   };
 
@@ -46,7 +52,7 @@ class Editor extends Component {
   }
 
   render() {
-    console.log(this.state.keyMap)
+    // console.log(this.state.keyMap)
     return (
       <div className="editor-container">
           <GlobalHotKeys keyMap={this.state.keyMap} handlers={this.state.keyHandlers}/>
@@ -54,10 +60,7 @@ class Editor extends Component {
             levels={this.state.levels}
             addLevel={this.addLevel.bind(this)}
             removeLevel={this.removeLevel.bind(this)}
-            /*We only compare the level data because otherwise changing the name
-              loses focus*/
-            selected={this.state.levels.map(function(level) { return level.data})
-                      .indexOf(this.state.curLevel.data)}
+            selected={this.getCurrentLevelInd()}
             changeLevel={this.changeLevel.bind(this)}
             updateName={this.updateLevelName.bind(this)}
             />
@@ -122,8 +125,12 @@ class Editor extends Component {
   }
 
   changeLevel(index) {
-    // console.log("CHANGING LEVEL TO ", index)
+    console.log("CHANGING LEVEL TO ", index)
     this.setState({curLevel: this.state.levels[index]});
+  }
+
+  getCurrentLevelInd() {
+    return this.state.levels.map(function(level) { return level.id}).indexOf(this.state.curLevel.id)
   }
 
   placeObject = (x, y) => {

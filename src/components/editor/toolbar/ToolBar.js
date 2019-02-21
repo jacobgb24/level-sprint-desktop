@@ -38,16 +38,44 @@ class ToolBar extends Component {
       'flip': 'f',
     },
     keyHandlers: {
-       'ground': (event) => this.props.changeObject({index: 0}),
-       'hill': (event) => this.props.changeObject({index: 1, rotation: this.state.objects[1].rotation}),
-       'hazard': (event) => this.props.changeObject({index: 2, rotation: this.state.objects[2].rotation}),
-       'spawn': (event) => this.props.changeObject({index: 3, flip: this.state.objects[3].flipped}),
-       'goal': (event) => this.props.changeObject({index: 4, flip: this.state.objects[4].flipped}),
-       'npc': (event) => this.props.changeObject({index: 5}),
-       'rotate': (event) => this.rotateObject(this.props.activeObject, this.props.changeObject),
-       'rotateCCW': (event) => this.rotateObject(this.props.activeObject, this.props.changeObject, true),
-       'flip': (event) => this.flipObject(this.props.activeObject, this.props.changeObject)
+       'ground': (event) => this.keyObjChangeHandler(0),
+       'hill': (event) => this.keyObjChangeHandler(1),
+       'hazard': (event) => this.keyObjChangeHandler(2),
+       'spawn': (event) => this.keyObjChangeHandler(3),
+       'goal': (event) => this.keyObjChangeHandler(4),
+       'npc': (event) => this.keyObjChangeHandler(5),
+       'rotate': (event) => this.keyRotateHandler(),
+       'rotateCCW': (event) => this.keyRotateHandler(true),
+       'flip': (event) => this.keyFlipHandler(),
    },
+  }
+
+  keyObjChangeHandler(index) {
+    // if already selected flip/rotate it to mimic a click. Both flip and rotate
+    // methods will check if that action is supported so nothing bad happens
+    if (index == this.props.activeObject) {
+        this.keyRotateHandler();
+        this.keyFlipHandler();
+    }
+    // otherwise just call changeObject after getting any rotation or flip vars
+    else {
+      var change = {index: index}
+      if (this.state.objects[index].rotates) {
+        change.rotation = this.state.objects[index].rotation;
+      }
+      if (this.state.objects[index].flips) {
+        change.flip = this.state.objects[index].flipped;
+      }
+      this.props.changeObject(change)
+    }
+  }
+
+  keyRotateHandler(reverse=false) {
+    this.rotateObject(this.props.activeObject, this.props.changeObject, reverse)
+  }
+
+  keyFlipHandler() {
+    this.flipObject(this.props.activeObject, this.props.changeObject)
   }
 
   // For these two we pass `changeShelfItem` because it needs to be called after the rotation

@@ -47,20 +47,28 @@ class LevelShelf extends Component {
           <ListItem
             className="level-list-item"
             key={i}>
-            <IgnoreKeys className="ignore-keys">
+              <IgnoreKeys className="ignore-keys">
 
-            <TextField
-              className="level-list-field"
-              fullWidth
-              filled
-              onTrailingIconSelect={(e) => this.setDeleteConf(i)}
-              trailingIcon={<MaterialIcon icon="delete_outline"/>}>
-                <Input className="level-list-input"
-                  value={this.props.levels[i].name}
-                  disabled={i != this.props.selected}
-                  onChange={(e) => this.props.updateName(i, e.target.value)}/>
-            </TextField>
-          </IgnoreKeys>
+                <TextField
+                  className="level-list-field"
+                  // dense
+                  // fullwidth
+                  // i == {this.props.selected} ? `fullwidth` : null
+                  // onTrailingIconSelect={(e) => this.setDeleteConf(i)}
+                  // trailingIcon={<MaterialIcon icon="delete_outline"/>}
+                  >
+                    <Input className="level-list-input"
+                      value={this.props.levels[i].name}
+                      disabled={i != this.props.selected}
+                      onChange={(e) => this.props.updateName(i, e.target.value)}/>
+                </TextField>
+              </IgnoreKeys>
+
+              <IconButton
+                onClick={(e) => this.setDeleteConf(i)}
+                className="level-list-delete">
+                <MaterialIcon icon="delete_outline"/>
+              </IconButton>
 
           </ListItem>
 

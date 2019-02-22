@@ -127,7 +127,7 @@ class Editor extends Component {
   }
 
   removeLevel(index) {
-    console.log("DEL", index)
+    // console.log("DEL", index)
     if (this.state.levels.length > 1) {
       this.setState({
         levels: update(this.state.levels, {$splice: [[index, 1]]})
@@ -141,14 +141,14 @@ class Editor extends Component {
   }
 
   updateLevelName(index, newName) {
-    console.log("NEW NAME", index, newName);
+    // console.log("NEW NAME", index, newName);
     this.setState({
       levels: update(this.state.levels, {[index]: {name: {$set: newName}}})
     })
   }
 
   changeLevel(index) {
-    console.log("CHANGING LEVEL TO ", index)
+    // console.log("CHANGING LEVEL TO ", index)
     this.setState({curLevel: this.state.levels[index]});
   }
 

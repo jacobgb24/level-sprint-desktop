@@ -48,7 +48,7 @@ hr {
   margin: 0px;
 }
 
-.shelf-help { // Doesn't work in any other file for some reason...
+.shelf-help {
   margin-left: auto;
   @include mdc-icon-button-size(24px, 24px, 4px)
 }

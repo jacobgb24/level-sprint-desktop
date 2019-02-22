@@ -4,6 +4,15 @@
 @import '@material/react-fab/index.scss';
 @import '@material/react-icon-button/index.scss';
 
+.fitted {
+  min-height: calc(100% - 116px);
+}
+
+@media only screen and (min-height: 700px){
+  .fitted {
+    min-height: 586px;
+  }
+}
 
 .levelbar-header {
   padding: 8px;
@@ -68,7 +77,9 @@
 }
 
 .level-list-add {
-  float: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   margin: 8px;
   @include mdc-fab-container-color($mdc-theme-secondary);
   @include mdc-fab-ink-color($mdc-theme-on-primary);
@@ -86,5 +97,4 @@ div[tabindex="-1"]:focus {
   // left: 0;
   // top: 0;
   // bottom: 0;
-
 }

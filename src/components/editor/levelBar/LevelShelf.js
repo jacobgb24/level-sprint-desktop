@@ -76,7 +76,7 @@ class LevelShelf extends Component {
     }
     // console.log(this.state.showDeleteConf)
     return (
-      <div className="editor-shelf">
+      <div className="editor-shelf fitted">
         {this.state.showDeleteConf >= 0 ?
           <DeleteConfirm delete={this.deleteConfirmCallback.bind(this)}
             levelName={this.props.levels[this.state.showDeleteConf].name}/>
@@ -103,6 +103,7 @@ class LevelShelf extends Component {
           handleSelect={(selectedIndex) => this.props.changeLevel(selectedIndex)}>
           {listItems}
         </List>
+        <div style={{height:`60px`}}/>
         <Fab className="level-list-add"
           mini
           // icon={<MaterialIcon icon="add"/>}

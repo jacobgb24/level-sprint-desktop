@@ -71,21 +71,25 @@ class Editor extends Component {
             : null
           }
           <GlobalHotKeys keyMap={this.state.keyMap} handlers={this.state.keyHandlers}/>
-          <LevelShelf className="editor-shelf"
-            levels={this.state.levels}
-            addLevel={this.addLevel.bind(this)}
-            removeLevel={this.removeLevel.bind(this)}
-            selected={this.getCurrentLevelInd()}
-            changeLevel={this.changeLevel.bind(this)}
-            updateName={this.updateLevelName.bind(this)}
-            />
+          <div className="tall sidebar left">
+            <LevelShelf
+              levels={this.state.levels}
+              addLevel={this.addLevel.bind(this)}
+              removeLevel={this.removeLevel.bind(this)}
+              selected={this.getCurrentLevelInd()}
+              changeLevel={this.changeLevel.bind(this)}
+              updateNam
+              e={this.updateLevelName.bind(this)}
+              />
+          </div>
           <Grid
             className="editor-grid"
             level={this.state.curLevel}
             click={this.placeObject}
           />
 
-          <div className='right-hand-sidebar'>
+          <div>
+          <div className='sidebar'>
             <ToolBar
               activeTool={this.state.activeTool}
               changeTool={this.changeTool}
@@ -106,7 +110,8 @@ class Editor extends Component {
               canAddRows={this.state.curLevel.canAddRow}
               canRemoveRows={this.state.curLevel.canRemoveRow}
             />
-          <div style={{height: `24px`}}/>
+          </div>
+          <div style={{height: `8px`}}/>
 
             <Button
               outlined

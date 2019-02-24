@@ -25,7 +25,7 @@ class Level {
   // value should be an object literal:
   // {obj: imageStr, rotation: degrees, flip: bool}
   // or just a string for compatibilty
-  set(x, y, value) {
+  set = (x, y, value) => {
     //handle old way of passing just string
     if (typeof value == "string") {
       value = {obj: value, rotation: 0, flip: 1}
@@ -33,14 +33,14 @@ class Level {
     this.data.subset(math.index(y, x), value);
   }
 
-  get(x, y) {
+  get = (x, y) => {
     // console.log(x,y)
     // console.log(math.subset(this.data, math.index(y, x)))
     return math.subset(this.data, math.index(y, x));
 
   }
 
-  addRow() {
+  addRow = () => {
     if (!((this.height + 1) * this.length > this.maxTiles)) {
       this.height += 1;
       this.resize();
@@ -48,7 +48,7 @@ class Level {
     this.checkAddRemove();
   }
 
-  removeRow() {
+  removeRow = () => {
     if (this.height > this.minHeight) {
       this.height -= 1;
       this.resize();
@@ -56,7 +56,7 @@ class Level {
     this.checkAddRemove();
   }
 
-  changeRowDimension(size) {
+  changeRowDimension = (size) => {
     console.log("ROW: "+size);
     if (size >= this.minHeight) {
       this.height = parseInt(size);
@@ -67,7 +67,7 @@ class Level {
 
 
 
-  addColumn() {
+  addColumn = () => {
     if (!((this.length + 1) * this.height > this.maxTiles)) {
       this.length += 1;
       this.resize();
@@ -75,7 +75,7 @@ class Level {
     this.checkAddRemove();
   }
 
-  removeColumn() {
+  removeColumn = () => {
     if (this.length > this.minLength) {
       this.length -= 1;
       this.resize();
@@ -83,8 +83,7 @@ class Level {
     this.checkAddRemove();
   }
 
-  changeColumnDimension(size) {
-    console.log("COL: "+size);
+  changeColumnDimension = (size) => {
     if (size >= this.minLength) {
       this.length = parseInt(size);
       this.resize();
@@ -92,7 +91,7 @@ class Level {
     this.checkAddRemove();
   }
 
-  checkAddRemove() {
+  checkAddRemove = () => {
     this.canAddRow = !((this.height + 1) * this.length > this.maxTiles);
     this.canRemoveRow = this.height > this.minHeight;
     this.canAddCol = !((this.length + 1) * this.height > this.maxTiles);
@@ -100,7 +99,8 @@ class Level {
     // console.log(this.canAddRow, this.canAddCol, this.canRemoveRow, this.canRemoveCol)
   }
 
-  canChangeRowDimension(size) {
+  canChangeRowDimension = (size) => {
+    size = parseInt(size);
     if (size > this.height) {
       return !((size)*this.length > this.maxTiles);
     } else {
@@ -108,7 +108,8 @@ class Level {
     }
   }
 
-  canChangeColumnDimension(size) {
+  canChangeColumnDimension = (size) => {
+    size = parseInt(size);
     if (size > this.length) {
       return !((size)*this.height > this.maxTiles);
     } else {
@@ -116,21 +117,21 @@ class Level {
     }
   }
 
-  setLength(length) {
+  setLength = (length) => {
     this.length = length;
     this.resize();
   }
 
-  setHeight(height) {
+  setHeight = (height) => {
     this.height = height;
     this.resize();
   }
 
-  resize() {
+  resize = () => {
     this.data.resize([this.height, this.length], {obj: blank, rotation: 0, flip: 1});
   }
 
-  rename(name) {
+  rename = (name) => {
     this.name = name;
   }
 }

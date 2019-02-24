@@ -124,6 +124,7 @@ class LevelDimension extends Component {
 
   commitChange = (e) => {
     if (this.props.canChangeDimension(this.state.value)) {
+      console.log("taco");
       this.props.changeDimension(this.state.value);
       this.setState({old_value: this.state.value});
     } else {

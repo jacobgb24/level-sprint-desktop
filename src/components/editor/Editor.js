@@ -62,7 +62,6 @@ class Editor extends Component {
   }
 
   render() {
-    // console.log(this.state.keyMap)
     return (
       <div className="editor-container">
           {this.state.showHotKeysDialog ?
@@ -88,37 +87,36 @@ class Editor extends Component {
           />
 
           <div>
-          <div className='sidebar'>
-            <ToolBar
-              activeTool={this.state.activeTool}
-              changeTool={this.changeTool}
-              activeObject={this.state.activeObject}
-              changeObject={this.changeObject}
-            />
+            <div className='sidebar'>
+              <ToolBar
+                activeTool={this.state.activeTool}
+                changeTool={this.changeTool}
+                activeObject={this.state.activeObject}
+                changeObject={this.changeObject}
+              />
+              <div style={{height: `8px`}}/>
+              <LevelResizer
+                level={this.state.curLevel}
+
+
+                cols={this.state.curLevel.length}
+                addColumn={this.addColumn}
+                removeColumn={this.removeColumn}
+                changeColumnDimension={this.changeColumnDimension}
+                canChangeColumnDimension={this.state.curLevel.canChangeColumnDimension}
+                canAddCols={this.state.curLevel.canAddCol}
+                canRemoveCols={this.state.curLevel.canRemoveCol}
+
+                rows={this.state.curLevel.height}
+                addRow={this.addRow}
+                removeRow={this.removeRow}
+                changeRowDimension={this.changeRowDimension}
+                canChangeRowDimension={this.state.curLevel.canChangeRowDimension}
+                canAddRows={this.state.curLevel.canAddRow}
+                canRemoveRows={this.state.curLevel.canRemoveRow}
+              />
+            </div>
             <div style={{height: `8px`}}/>
-            <LevelResizer
-              level={this.state.curLevel}
-
-
-              cols={this.state.curLevel.length}
-              addColumn={this.addColumn}
-              removeColumn={this.removeColumn}
-              changeColumnDimension={this.changeColumnDimension}
-              canChangeColumnDimension={this.state.curLevel.canChangeColumnDimension}
-              canAddCols={this.state.curLevel.canAddCol}
-              canRemoveCols={this.state.curLevel.canRemoveCol}
-
-              rows={this.state.curLevel.height}
-              addRow={this.addRow}
-              removeRow={this.removeRow}
-              changeRowDimension={this.changeRowDimension}
-              canChangeRowDimension={this.canChangeRowDimension}
-              canAddRows={this.state.curLevel.canAddRow}
-              canRemoveRows={this.state.curLevel.canRemoveRow}
-            />
-          </div>
-          <div style={{height: `8px`}}/>
-
             <Button
               outlined
               className="hotkey-button"
@@ -138,7 +136,6 @@ class Editor extends Component {
   }
 
   removeLevel(index) {
-    // console.log("DEL", index)
     if (this.state.levels.length > 1) {
       this.setState({
         levels: update(this.state.levels, {$splice: [[index, 1]]})
@@ -152,14 +149,12 @@ class Editor extends Component {
   }
 
   updateLevelName(index, newName) {
-    // console.log("NEW NAME", index, newName);
     this.setState({
       levels: update(this.state.levels, {[index]: {name: {$set: newName}}})
     })
   }
 
   changeLevel(index) {
-    // console.log("CHANGING LEVEL TO ", index)
     this.setState({curLevel: this.state.levels[index]});
   }
 
@@ -168,7 +163,7 @@ class Editor extends Component {
   }
 
   placeObject = (x, y) => {
-    let deleteTool = 2;
+    let deleteTool = 1;
     let value = null;
     if (this.state.activeTool === deleteTool) {
       value = {obj:blank, rotation: 0, flip: 1};
@@ -182,14 +177,11 @@ class Editor extends Component {
   }
 
   changeObject = ({index, rotation=0, flip=1} = {}) => {
-    // console.log(index, rotation, flip)
     this.setState({activeObject: index, activeObjectRotation: rotation, activeObjectFlip: flip})
     this.changeTool({index: 0});
   }
 
   changeTool = (index) => {
-    // for some reason the index is wrapped in an object
-    // console.log("Changed tool:", index)
     this.setState({activeTool: index.index});
   }
 
@@ -204,7 +196,6 @@ class Editor extends Component {
   };
 
   changeColumnDimension = (size) => {
-    console.log("COLUMN: " + size);
     this.state.curLevel.changeColumnDimension(size);
     this.setState(prev => ({curLevel: prev.curLevel}));
   };
@@ -220,7 +211,6 @@ class Editor extends Component {
   };
 
   changeRowDimension = (size) => {
-    console.log("ROW: " + size);
     this.state.curLevel.changeRowDimension(size);
     this.setState(prev => ({curLevel: prev.curLevel}));
   };

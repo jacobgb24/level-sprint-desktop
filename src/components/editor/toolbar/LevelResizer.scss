@@ -68,12 +68,3 @@
 .mdc-text-field::before, .mdc-text-field::after {
     background-color: rgba(0, 0, 0, 0);
 }
-
-.level-list-delete {
-  color: $mdc-theme-primary !important;
-  @include mdc-icon-button-size(24px, 24px, 0px);
-}
-
-.mdc-text-field--disabled {
-  background-color: transparent;
-}

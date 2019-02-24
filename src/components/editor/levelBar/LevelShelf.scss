@@ -69,7 +69,11 @@
 
 //added so that this is better enforced. Not sure why it changed
 .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mdc-text-field__input {
-    border-bottom-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0) !important;
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mdc-text-field__input:hover {
+    border-bottom-color: $mdc-theme-secondary !important;
 }
 
 
@@ -79,7 +83,7 @@
 }
 
 .mdc-text-field--disabled {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .level-list-add {

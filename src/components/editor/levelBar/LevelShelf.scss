@@ -67,6 +67,12 @@
     background-color: rgba(0, 0, 0, 0);
 }
 
+//added so that this is better enforced. Not sure why it changed
+.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mdc-text-field__input {
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+
 .level-list-delete {
   color: $mdc-theme-primary !important;
   @include mdc-icon-button-size(24px, 24px, 0px);

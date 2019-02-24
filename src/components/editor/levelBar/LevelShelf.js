@@ -48,15 +48,7 @@ class LevelShelf extends Component {
             className="level-list-item"
             key={i}>
               <IgnoreKeys className="ignore-keys">
-
-                <TextField
-                  className="level-list-field"
-                  // dense
-                  // fullwidth
-                  // i == {this.props.selected} ? `fullwidth` : null
-                  // onTrailingIconSelect={(e) => this.setDeleteConf(i)}
-                  // trailingIcon={<MaterialIcon icon="delete_outline"/>}
-                  >
+                <TextField className="level-list-field">
                     <Input className="level-list-input"
                       value={this.props.levels[i].name}
                       disabled={i != this.props.selected}
@@ -69,9 +61,7 @@ class LevelShelf extends Component {
                 className="level-list-delete">
                 <MaterialIcon icon="delete_outline"/>
               </IconButton>
-
           </ListItem>
-
       );
     }
     // console.log(this.state.showDeleteConf)
@@ -106,7 +96,6 @@ class LevelShelf extends Component {
         <div style={{height:`60px`}}/>
         <Fab className="level-list-add"
           mini
-          // icon={<MaterialIcon icon="add"/>}
           textLabel="New Level"
           onClick={this.props.addLevel}/>
       </div>

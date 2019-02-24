@@ -4,6 +4,8 @@
 @import '@material/react-icon-button/index.scss';
 @import '@material/image-list/mdc-image-list';
 @import '@material/react-ripple/index.scss';
+@import '@material/react-text-field/index.scss';
+
 
 .dimension-button { //TODO: this is getting overridden somehow
   @include mdc-icon-button-size(24px, 24px, 0px);
@@ -29,4 +31,49 @@
   text-align: center;
   margin-bottom: 0px;
   margin-top: 4px;
+}
+
+.dimensions-input {
+  width: 40px;
+  text-align: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.dimensions-field {
+  padding-bottom: 12px;
+  margin-left: 0px;
+  @include mdc-text-field-caret-color($mdc-theme-secondary);
+  @include mdc-text-field-bottom-line-color(#00000000); //bottom line hidden
+  @include mdc-text-field-hover-bottom-line-color($mdc-theme-secondary); //show it on hover
+  @include mdc-text-field-line-ripple-color($mdc-theme-secondary); //show thicker on click
+}
+
+
+.mdc-line-ripple {
+  bottom: 12px;
+}
+
+//prevents background when selected
+.mdc-text-field:not(.mdc-text-field--disabled) {
+    background-color: #00000000;
+}
+
+//hide bottom line on disabled fields
+.mdc-text-field--disabled .mdc-text-field__input {
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+//prevents hover color
+.mdc-text-field::before, .mdc-text-field::after {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.level-list-delete {
+  color: $mdc-theme-primary !important;
+  @include mdc-icon-button-size(24px, 24px, 0px);
+}
+
+.mdc-text-field--disabled {
+  background-color: transparent;
 }

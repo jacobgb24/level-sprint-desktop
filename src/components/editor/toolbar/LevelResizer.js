@@ -6,6 +6,10 @@ import {GlobalHotKeys} from 'react-hotkeys';
 import HelpDialog from '../helpDialogs/Dialog.js';
 import DimHelp from '../helpDialogs/DimHelp.js'
 
+import {IgnoreKeys} from 'react-hotkeys';
+import TextField, {HelperText, Input} from '@material/react-text-field';
+
+
 import './Shelf.scss'
 import './LevelResizer.scss'
 
@@ -28,7 +32,6 @@ class LevelResizer extends Component {
        'remove-row': (event) => this.props.canRemoveRows ? this.props.removeRow() : null,
        'add-col': (event) => this.props.canAddCols ? this.props.addColumn() : null,
        'remove-col': (event) => this.props.canRemoveCols ? this.props.removeColumn() : null,
-
    },
   }
 
@@ -41,7 +44,7 @@ class LevelResizer extends Component {
     if (this.state.showDimsHelp === true) {
       console.log("POPUP")
       divs.push(
-        <div>
+        <div key={1}>
           <HelpDialog onClose={this.toggleDimsDialog}
             title="Dimensions Help" content={<DimHelp/>}/>
         </div>
@@ -49,7 +52,7 @@ class LevelResizer extends Component {
     }
 
     divs.push(
-      <div className="LevelResizer">
+      <div className="LevelResizer" key={2}>
         <div className="shelf">
           <div className="shelf-header">
             <h2 className="shelf-title">Level Dimensions</h2>
@@ -64,6 +67,8 @@ class LevelResizer extends Component {
             canAdd={this.props.canAddCols}
             canRemove={this.props.canRemoveCols}
             value={this.props.cols}
+            changeDimension={this.props.changeColumnDimension}
+            canChangeDimension={this.props.canChangeColumnDimension}
             name="Columns"
           />
 
@@ -73,6 +78,8 @@ class LevelResizer extends Component {
             canAdd={this.props.canAddRows}
             canRemove={this.props.canRemoveRows}
             value={this.props.rows}
+            changeDimension={this.props.changeRowDimension}
+            canChangeDimension={this.props.canChangeRowDimension}
             name="Rows"
           />
         </div>
@@ -93,25 +100,79 @@ class LevelResizer extends Component {
   LevelDimension: Generic UI component for adding/removing
   rows and columns
 */
-const LevelDimension = props => {
-  return (
-    <div>
-      <h4 className="dimension-direction">{props.name}</h4>
-      <div className="dimensions-selector">
-        <IconButton onClick={props.remove}
-          className="dimension-button"
-          disabled={!props.canRemove}>
-          <MaterialIcon icon="remove_circle_outline"/>
-        </IconButton>
-        <h2 className="dimension-value">{props.value}</h2>
-        <IconButton onClick={props.add}
-          className="dimension-button"
-          disabled={!props.canAdd}>
-          <MaterialIcon icon="add_circle_outline"/>
-        </IconButton>
+
+class LevelDimension extends Component {
+  state = {
+    value: this.props.value,
+    old_value: this.props.value
+  }
+
+  changeText = (e) => {
+    var val = parseInt(e.target.value);
+    if (!isNaN(val)) {
+      this.setState({value: val});
+    } else if (e.target.value === "") {
+      this.setState({value: ""});
+    }
+  }
+
+  keyPress = (e) => {
+    if (e.key === 'Enter') {
+      this.commitChange(e);
+    }
+  }
+
+  commitChange = (e) => {
+    if (this.props.canChangeDimension(this.state.value)) {
+      this.props.changeDimension(this.state.value);
+      this.setState({old_value: this.state.value});
+    } else {
+      this.setState({value: this.state.old_value});
+    }
+  }
+
+  add = (e) => {
+    this.props.add();
+    this.setState(prev => ({value: prev.value+1, old_value: prev.value+1}));
+  }
+
+  remove = (e) => {
+    this.props.remove();
+    this.setState(prev => ({value: prev.value-1, old_value: prev.value-1}));
+  }
+
+  render() {
+    console.log("NAME: " + this.props.name);
+    return (
+      <div>
+        <h4 className="dimension-direction">{this.props.name}</h4>
+        <div className="dimensions-selector">
+          <IconButton onClick={this.remove}
+            className="dimension-button"
+            disabled={!this.props.canRemove}>
+            <MaterialIcon icon="remove_circle_outline"/>
+          </IconButton>
+          <IgnoreKeys className='ignore-keys'>
+            <TextField className="dimensions-field">
+              <Input className="dimensions-input"
+                value={this.state.value}
+                onChange={this.changeText}
+                onBlur={this.commitChange}
+                onKeyPress={this.keyPress}
+              />
+            </TextField>
+          </IgnoreKeys>
+
+          <IconButton onClick={this.add}
+            className="dimension-button"
+            disabled={!this.props.canAdd}>
+            <MaterialIcon icon="add_circle_outline"/>
+          </IconButton>
+        </div>
       </div>
-    </div>
-  );
+    );
+    // <h2 className="dimension-value">{props.value}</h2>
+  }
 }
 
 export default LevelResizer;

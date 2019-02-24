@@ -56,6 +56,17 @@ class Level {
     this.checkAddRemove();
   }
 
+  changeRowDimension(size) {
+    console.log("ROW: "+size);
+    if (size >= this.minHeight) {
+      this.height = parseInt(size);
+      this.resize();
+    }
+    this.checkAddRemove();
+  }
+
+
+
   addColumn() {
     if (!((this.length + 1) * this.height > this.maxTiles)) {
       this.length += 1;
@@ -72,6 +83,15 @@ class Level {
     this.checkAddRemove();
   }
 
+  changeColumnDimension(size) {
+    console.log("COL: "+size);
+    if (size >= this.minLength) {
+      this.length = parseInt(size);
+      this.resize();
+    }
+    this.checkAddRemove();
+  }
+
   checkAddRemove() {
     this.canAddRow = !((this.height + 1) * this.length > this.maxTiles);
     this.canRemoveRow = this.height > this.minHeight;
@@ -80,6 +100,21 @@ class Level {
     // console.log(this.canAddRow, this.canAddCol, this.canRemoveRow, this.canRemoveCol)
   }
 
+  canChangeRowDimension(size) {
+    if (size > this.height) {
+      return !((size)*this.length > this.maxTiles);
+    } else {
+      return size > this.minHeight;
+    }
+  }
+
+  canChangeColumnDimension(size) {
+    if (size > this.length) {
+      return !((size)*this.height > this.maxTiles);
+    } else {
+      return size > this.minLength;
+    }
+  }
 
   setLength(length) {
     this.length = length;

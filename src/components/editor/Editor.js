@@ -78,8 +78,7 @@ class Editor extends Component {
               removeLevel={this.removeLevel.bind(this)}
               selected={this.getCurrentLevelInd()}
               changeLevel={this.changeLevel.bind(this)}
-              updateNam
-              e={this.updateLevelName.bind(this)}
+              updateName={this.updateLevelName.bind(this)}
               />
           </div>
           <Grid
@@ -98,15 +97,22 @@ class Editor extends Component {
             />
             <div style={{height: `8px`}}/>
             <LevelResizer
+              level={this.state.curLevel}
+
+
               cols={this.state.curLevel.length}
               addColumn={this.addColumn}
               removeColumn={this.removeColumn}
+              changeColumnDimension={this.changeColumnDimension}
+              canChangeColumnDimension={this.state.curLevel.canChangeColumnDimension}
               canAddCols={this.state.curLevel.canAddCol}
               canRemoveCols={this.state.curLevel.canRemoveCol}
 
               rows={this.state.curLevel.height}
               addRow={this.addRow}
               removeRow={this.removeRow}
+              changeRowDimension={this.changeRowDimension}
+              canChangeRowDimension={this.canChangeRowDimension}
               canAddRows={this.state.curLevel.canAddRow}
               canRemoveRows={this.state.curLevel.canRemoveRow}
             />
@@ -197,6 +203,12 @@ class Editor extends Component {
     this.setState(prev => ({curLevel: prev.curLevel}));
   };
 
+  changeColumnDimension = (size) => {
+    console.log("COLUMN: " + size);
+    this.state.curLevel.changeColumnDimension(size);
+    this.setState(prev => ({curLevel: prev.curLevel}));
+  };
+
   addRow = () => {
     this.state.curLevel.addRow();
     this.setState(prev => ({curLevel: prev.curLevel}));
@@ -204,6 +216,12 @@ class Editor extends Component {
 
   removeRow = () => {
     this.state.curLevel.removeRow();
+    this.setState(prev => ({curLevel: prev.curLevel}));
+  };
+
+  changeRowDimension = (size) => {
+    console.log("ROW: " + size);
+    this.state.curLevel.changeRowDimension(size);
     this.setState(prev => ({curLevel: prev.curLevel}));
   };
 

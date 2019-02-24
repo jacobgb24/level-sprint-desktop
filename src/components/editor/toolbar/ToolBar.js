@@ -22,7 +22,7 @@ class ToolBar extends Component {
       {name:'Hazard', inactive:image.hazard_line, active:image.hazard_fill, rotates:true, flips:false, rotation:0},
       {name:'Spawn', inactive:image.spawn_line, active:image.spawn_fill, rotates:false, flips:true, flipped:1},
       {name:'Goal', inactive:image.goal_line, active:image.goal_fill, rotates:false, flips:true, flipped:1},
-      {name:'NPC', inactive:image.npc_line, active:image.npc_fill, rotates:false, flips:false}
+      {name:'Enemy', inactive:image.npc_line, active:image.npc_fill, rotates:false, flips:false}
     ],
     // handle these at this layer since it knows rotation
     // keyMap {name: keys,...}. keyHandlers {name: function,...}
@@ -99,7 +99,7 @@ class ToolBar extends Component {
   render() {
     let divs = [];
     divs.push(
-      <div className="tools-shelf">
+      <div className="tools-shelf" key={1}>
         <ToolShelf
           active={this.props.activeTool}
           changeShelfItem={this.props.changeTool}
@@ -109,9 +109,9 @@ class ToolBar extends Component {
 
     let placeTool = 0;
     if (this.props.activeTool === placeTool) {
-        divs.push(<hr/>);
+        divs.push(<hr key={2}/>);
         divs.push(
-          <div className="level-objects-shelf">
+          <div className="level-objects-shelf" key={3}>
             <ObjectShelf
               objects={this.state.objects}
               active={this.props.activeObject}
@@ -137,7 +137,7 @@ class ToolShelf extends Component {
   state = {
     tools: [
       {name:'Place', inactive:image.place_line, active:image.place_fill},
-      {name:'Move', inactive:image.move_line, active:image.move_fill},
+      // {name:'Move', inactive:image.move_line, active:image.move_fill},
       {name:'Delete', inactive:image.delete_line, active:image.delete_fill}
     ],
     showToolsHelp: false,
@@ -150,7 +150,7 @@ class ToolShelf extends Component {
       let tool = this.state.tools[i];
       let icon = i === this.props.active ? tool.active : tool.inactive;
 
-      items.push(<ShelfItem
+      items.push(<ShelfItem className="toolshelf-item"
           item={tool}
           active={(i === this.props.active)}
           key={i}
@@ -178,7 +178,7 @@ class ToolShelf extends Component {
             </IconButton>
         </div>
 
-        <div className="shelf-items">
+        <div className="tool shelf-items">
           {items}
         </div>
       </div>

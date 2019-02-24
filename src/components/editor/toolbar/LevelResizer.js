@@ -124,7 +124,7 @@ class LevelDimension extends Component {
 
   commitChange = (e) => {
     if (this.props.canChangeDimension(this.state.value)) {
-      console.log("taco");
+      // console.log("taco");
       this.props.changeDimension(this.state.value);
       this.setState({old_value: this.state.value});
     } else {
@@ -132,14 +132,22 @@ class LevelDimension extends Component {
     }
   }
 
-  add = (e) => {
-    this.props.add();
-    this.setState(prev => ({value: prev.value+1, old_value: prev.value+1}));
-  }
+  // add = (e) => {
+  //   this.props.add();
+  //   this.setState(prev => ({value: prev.value+1, old_value: prev.value+1}));
+  // }
+  //
+  // remove = (e) => {
+  //   this.props.remove();
+  //   this.setState(prev => ({value: prev.value-1, old_value: prev.value-1}));
+  // }
 
-  remove = (e) => {
-    this.props.remove();
-    this.setState(prev => ({value: prev.value-1, old_value: prev.value-1}));
+  // check if the value was changed through some other means (hotkey or click)
+  // then update the textfield if it was
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.value != this.props.value) {
+      this.setState({value: this.props.value, old_value: this.props.value})
+    }
   }
 
   render() {
@@ -148,7 +156,7 @@ class LevelDimension extends Component {
       <div>
         <h4 className="dimension-direction">{this.props.name}</h4>
         <div className="dimensions-selector">
-          <IconButton onClick={this.remove}
+          <IconButton onClick={this.props.remove}
             className="dimension-button"
             disabled={!this.props.canRemove}>
             <MaterialIcon icon="remove_circle_outline"/>
@@ -164,7 +172,7 @@ class LevelDimension extends Component {
             </TextField>
           </IgnoreKeys>
 
-          <IconButton onClick={this.add}
+          <IconButton onClick={this.props.add}
             className="dimension-button"
             disabled={!this.props.canAdd}>
             <MaterialIcon icon="add_circle_outline"/>

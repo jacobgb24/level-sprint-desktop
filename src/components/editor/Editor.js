@@ -33,8 +33,8 @@ class Editor extends Component {
     // handle keys for tool layer up here since no lower dependencies
     // keyMap {name: keys,...}. keyHandlers {name: function,...}
     keyMap: {
-        'place': 'q',
-        'move': 'w',
+        'place': 'w',
+        // 'move': 'w',
         'delete': 'e',
         'next-level': '>',
         'prev-level': '<',
@@ -42,8 +42,8 @@ class Editor extends Component {
     },
     keyHandlers: {
        'place': (event) => this.changeTool({index: 0}),
-       'move': (event) => this.changeTool({index: 1}),
-       'delete': (event) => this.changeTool({index: 2}),
+       // 'move': (event) => this.changeTool({index: 1}),
+       'delete': (event) => this.changeTool({index: 1}),
        'next-level': (event) => this.changeLevel((this.getCurrentLevelInd() + 1) % this.state.levels.length),
        'prev-level': (event) => this.changeLevel(this.getCurrentLevelInd() != 0 ? (this.getCurrentLevelInd() - 1) : this.state.levels.length - 1),
        'new-level': (event) => this.addLevel(null),

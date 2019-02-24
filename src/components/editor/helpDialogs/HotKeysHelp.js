@@ -9,14 +9,12 @@ const HotKeysHelp = props => {
       Change to the corresponding tool.
       <div className="row">
         <div className="column">
-          {kbdWrapper('q', "Place")}
-        </div>
-        <div className="column">
-          {kbdWrapper('w', 'Move')}
+          {kbdWrapper('w', "Place")}
         </div>
         <div className="column">
           {kbdWrapper('e', 'Delete')}
         </div>
+        <div className="column"/>
       </div>
       <h4>Object Shortcuts</h4>
       Select the corresponding object. Pressing the key again will rotate/flip the object.
@@ -40,16 +38,16 @@ const HotKeysHelp = props => {
       {kbdWrapper('<', "Go to the previous level")}
       {kbdWrapper('n', "Create new level")}
       <h4>Dimension Shortcuts</h4>
-      Change the dimensions of the current level.
+      Change the dimensions of the current level using the arrow keys.
       <div className="row">
         <div className="column">
-          {kbdWrapper('🠄', "Remove column")}
-          {kbdWrapper('🠇', "Remove row")}
+          {kbdWrapper(<span>&larr;</span>, "Remove column")}
+          {kbdWrapper(<span>&darr;</span>, "Remove row")}
 
         </div>
         <div className="column">
-          {kbdWrapper('🠆', "Add column")}
-          {kbdWrapper('🠅', "Add row")}
+          {kbdWrapper(<span>&rarr;</span>, "Add column")}
+          {kbdWrapper(<span>&uarr;</span>, "Add row")}
 
         </div>
       </div>

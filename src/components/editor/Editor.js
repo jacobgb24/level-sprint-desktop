@@ -39,6 +39,7 @@ class Editor extends Component {
         'next-level': '>',
         'prev-level': '<',
         'new-level': 'n',
+        'secret-json': '/',
     },
     keyHandlers: {
        'place': (event) => this.changeTool({index: 0}),
@@ -47,6 +48,7 @@ class Editor extends Component {
        'next-level': (event) => this.changeLevel((this.getCurrentLevelInd() + 1) % this.state.levels.length),
        'prev-level': (event) => this.changeLevel(this.getCurrentLevelInd() != 0 ? (this.getCurrentLevelInd() - 1) : this.state.levels.length - 1),
        'new-level': (event) => this.addLevel(null),
+       'secret-json': (event) => this.state.curLevel.toJson()
    },
   };
 

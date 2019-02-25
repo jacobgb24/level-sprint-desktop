@@ -53,9 +53,10 @@ class ToolBar extends Component {
   keyObjChangeHandler(index) {
     // if already selected flip/rotate it to mimic a click. Both flip and rotate
     // methods will check if that action is supported so nothing bad happens
-    if (index == this.props.activeObject) {
+    if (index == this.props.activeObject && this.props.activeTool == 0) {
         this.keyRotateHandler();
         this.keyFlipHandler();
+
     }
     // otherwise just call changeObject after getting any rotation or flip vars
     else {

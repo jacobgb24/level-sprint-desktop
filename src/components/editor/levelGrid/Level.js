@@ -1,5 +1,4 @@
 import * as math from 'mathjs'
-
 import {blank, ground, spawn} from 'images';
 
 var globalLevelID = 0;
@@ -134,6 +133,28 @@ class Level {
   rename = (name) => {
     this.name = name;
   }
+
+  // toJson() {
+  //   const jsonfile = require('jsonfile')
+  //   let write_data = {name: this.name,
+  //           height: this.height,
+  //           length: this.length,
+  //           matrix: this.data}
+  //   console.log(JSON.stringify(this.data))
+  // }
+  //
+  // fromJson() {
+  //   var data = require('./test.json');
+  //   console.log("DATA", data)
+  //   const matrix = JSON.parse(data, math.json.reviver)
+  //   // var in_data = JSON.parse(testLevel, math.json.reviver)
+  //   console.log("M", matrix)
+  //   // console.log(testLevel)
+  //   // let in_data = testLevel
+  //   this.data = matrix
+  //
+  //   // this.checkAddRemove()
+  // }
 }
 
 class DefaultLevel extends Level {
@@ -144,6 +165,7 @@ class DefaultLevel extends Level {
   }
 
   build_default() {
+
     for (let y=0; y<3; y++) {
       for (let x=0; x<7; x++) {
         this.set(x, y, ground);

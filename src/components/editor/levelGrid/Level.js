@@ -103,7 +103,7 @@ class Level {
     if (size > this.height) {
       return !((size)*this.length > this.maxTiles);
     } else {
-      return size > this.minHeight;
+      return size >= this.minHeight;
     }
   }
 
@@ -112,7 +112,7 @@ class Level {
     if (size > this.length) {
       return !((size)*this.height > this.maxTiles);
     } else {
-      return size > this.minLength;
+      return size >= this.minLength;
     }
   }
 
